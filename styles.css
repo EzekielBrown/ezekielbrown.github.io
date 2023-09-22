@@ -49,3 +49,18 @@ body {
   padding: 0px 5px;
 }
 
+@media only screen and (max-width: 600px) {
+    .text {
+        font-size: 2rem;
+    }
+    
+    .social-links {
+        top: 20px;
+        padding: 10px;
+    }
+    
+    .social-links a {
+        font-size: 1em;
+        padding: 0px 3px;
+    }
+}
