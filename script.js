@@ -79,22 +79,16 @@ function generateNoise(canvas, ctx, width, height) {
   let currentWord = DEFAULT_WORD;
   
   function setWord(newWord) {
-    const letters = textElement.querySelectorAll("span");
+    textElement.innerHTML = '';
+
     for (let i = 0; i < newWord.length; i++) {
       let char = newWord[i] === " " ? "\u00A0" : newWord[i];
-      if (letters[i]) {
-        letters[i].textContent = char;
-      } else {
-        const newSpan = document.createElement("span");
-        newSpan.textContent = char;
-        textElement.appendChild(newSpan);
-      }
+      const newSpan = document.createElement("span");
+      newSpan.textContent = char;
+      newSpan.classList.add("faded"); 
+      textElement.appendChild(newSpan);
     }
-  
-    for (let i = letters.length - 1; i >= newWord.length; i--) {
-      letters[i].remove();
-    }
-  }
+}
   
   function changeWord() {
     fadeOutLetters();
@@ -123,6 +117,7 @@ function generateNoise(canvas, ctx, width, height) {
   }
   
   setWord(DEFAULT_WORD);
-  
+  fadeInLetters();
   setTimeout(changeWord, 4000);
+  
   
