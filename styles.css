@@ -48,6 +48,11 @@ body {
   font-size: 1.2em;
   padding: 0px 5px;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #e0e0e0;
 }
 
 @media only screen and (max-width: 600px) {
