@@ -53,8 +53,9 @@
   .scrolling-content6 > div,
   .scrolling-content7 > div {
     display: flex;
-    animation: scrollText 30s infinite linear;
-  }
+    animation: scrollText 60s infinite linear;
+    -webkit-animation: scrollText 60s infinite linear;
+}
 
   .scrolling-content h1,
   .scrolling-content3 h1,
