@@ -1,6 +1,6 @@
+/* Global Styles */
 * {
     font-family: 'Nova Square', sans-serif;
-    
 }
 
 body::before {
@@ -8,13 +8,13 @@ body::before {
     position: fixed;
     left: 0;
     top: 0;
-    width: 15%; /* Width of the line */
-    height: 100vh; /* Full height of the viewport */
-    background-color: #231f24; /* Color of the line */
-    z-index: -1; /* Place it behind the content */
+    width: 15%;
+    height: 100vh;
+    background-color: #231f24;
+    z-index: -1;
 }
 
-
+/* Container and Row */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -28,10 +28,10 @@ body::before {
     height: 100%;
 }
 
-/* Common styles for all sections */
+/* Section Common Styles */
 .scroll {
-    height: 100vh; /* Full viewport height */
-    min-height: 100%; /* At least full height of the content */
+    height: 100vh;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,16 +39,20 @@ body::before {
     overflow: auto;
 }
 
-/* Individual section styles */
-.s-one {
-    background-color: #414042;
+/* Section Individual Styles */
+.s-one, .s-three, .s-five {
+    background-color: rgb(255, 248, 233);
+    color: #000;
 }
-.s-three, .s-five { background-color: rgb(255, 248, 233); color: #000; }
-.s-two, .s-four { background-color: rgb(255, 255, 255);position: relative;}
 
-/* Common styles for top and bottom rip images in both sections */
-.s-four .top-rip, .s-four .bot-rip,
-.s-two .top-rip, .s-two .bot-rip {
+.s-two, .s-four {
+    background-color: rgb(255, 255, 255);
+    position: relative;
+}
+
+/* Top and Bottom Rips for Sections */
+.s-two .top-rip, .s-two .bot-rip,
+.s-four .top-rip, .s-four .bot-rip {
     width: 100%;
     height: auto;
     display: block;
@@ -57,35 +61,14 @@ body::before {
     z-index: 1;
 }
 
-/* Positioning for top rip images */
-.s-four .top-rip, .s-two .top-rip {
-    top: 0;
-}
+.s-two .top-rip, .s-four .top-rip { top: 0; }
+.s-two .bot-rip, .s-four .bot-rip { bottom: 0; }
 
-/* Positioning for bottom rip images */
-.s-four .bot-rip, .s-two .bot-rip {
-    bottom: 0;
-}
-
-
-/* Header and content styles */
+/* Header and Separator */
 .header {
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-}
-
-@keyframes highlightFadeIn {
-    from { background-size: 0% 30px; }
-    to { background-size: 100% 30px; }
-}
-
-.header.highlighted h2 {
-    background-image: url('/assets/cv/brush.png');
-    background-repeat: no-repeat;
-    background-size: 100% 30px;
-    background-position: left center;
-    animation: highlightFadeIn 1s forwards;
 }
 
 .vertical-separator {
@@ -97,6 +80,7 @@ body::before {
     padding-bottom: 50px;
 }
 
+/* Text Styles */
 h1 {
     font-size: 5rem;
     margin-bottom: 0.5rem;
@@ -108,80 +92,50 @@ h1 {
     line-height: 1.1;
 }
 
+.sub-title {
+    font-size: 2rem;
+}
+
+.content p, .content .sub-info {
+    font-size: 1rem;
+}
+
+.content .sub-info {
+    margin-top: -1rem;
+}
+
 .content {
     padding-bottom: 4rem;
     margin: 0 10rem;
 }
 
-.content-left { text-align: left; padding-left: 0; }
-
-.content p { font-size: 1rem; }
-.content .sub-info { font-size: 0.7rem; margin-top: -1rem; }
-
-/* Scroll control styles */
+/* Scroll Control */
 .scroll-control {
     position: fixed;
     right: 20px;
     top: 50%;
     transform: translateX(-50%);
     z-index: 999;
-    justify-content: center;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .scroll-control i, .scroll-control .icon-svg {
     cursor: pointer;
-    display: block;
     width: 30px;
     height: 30px;
     margin: 10px 0;
     opacity: 0.7;
-    color: #000; /* For Font Awesome icons */
+    color: #000;
 }
 
-.sub-title {
-    font-size: 2rem;
+.scroll-control i:hover, .scroll-control .icon-svg:hover {
+    opacity: 1;
 }
 
-.scroll-control i:hover, .scroll-control .icon-svg:hover { opacity: 1; }
-
-.home-icon.active { content: url('/assets/cv/home1.svg'); }
-
-/* Responsive adjustments */
-@media all and (max-width: 1023px) {
-    .scroll-control span { display: none; }
-}
-
-@media (max-width: 768px) {
-    .s-one p { font-size: 1rem; }
-    .scroll-control .icon-svg { width: 20px; height: 20px; margin: 0 15px;}
-    .header h2 { font-size: 1.5rem; }
-    .content p, .content .sub-info { font-size: 0.9rem; }
-    .scroll-control {top: 95%; flex-direction: row; align-items: center; justify-content: center; left: 50% }
-    .vertical-separator { height: 5px;  margin-bottom: 10px; }
-    img { max-width: 100%; height: auto; }
-    input, button, select, textarea { font-size: 16px; }
-    .scroll {
-        height: 100%; 
-    }
-    .s-one { padding: 0 50px; }
-    hr { width: 50%; 
-    align-items: left;
-    margin-left: 0;
-    .sidebar {
-        width: 70px;
-    }
-
-}
-
-}
-
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-
+/* Sidebar and Home Button */
 .sidebar {
     position: fixed;
     width: 140px;
@@ -191,26 +145,25 @@ h1 {
     align-items: top;
     justify-content: center;
     z-index: 10;
-    transition: opacity 0.5s ease;
 }
 
 .sidebar-image {
+    position: absolute;
     max-width: 60%;
     height: auto;
-    position: absolute;
     padding-top: 10%;
+    opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    opacity: 0; /* Start with the image being transparent */
 }
 
 .home-button {
     position: absolute;
-    bottom: 10px; 
+    bottom: 10px;
     left: 50%;
-    transform: translateX(-50%); 
-    padding: 10px 20px; 
-    background-color: transparent; 
-    color: rgb(90, 90, 90); 
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: transparent;
+    color: rgb(90, 90, 90);
     border: none;
     cursor: pointer;
     text-align: center;
@@ -219,18 +172,19 @@ h1 {
 
 .home-button:hover {
     color: #acacac;
-
 }
 
-.info-sections-container {
+/* Flex Containers for Sections */
+.info-sections-container, .education-container, .work-container, .skills-container {
     display: flex;
     justify-content: space-around;
     align-items: start;
-    flex-wrap: wrap; /* Allows sections to stack on smaller screens */
+    flex-wrap: wrap;
 }
 
-.info-section {
-    flex-basis: 30%; /* Each section takes up roughly a third of the container width */
+/* Flex Items for Sections */
+.info-section, .education-section, .work-section, .skill-section {
+    flex-basis: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,111 +192,44 @@ h1 {
     margin-bottom: 20px;
 }
 
-.info-icon {
+/* Icons for Sections */
+.info-icon, .education-icon, .work-icon, .skill-icon {
     width: 50px;
     height: 50px;
     margin-bottom: 15px;
 }
 
-.info-section h3 {
-    margin: 0 0 10px 0;
-    color: #333;
-}
-
-.info-section p {
-    color: #666;
-}
-
-.education-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: start;
-    flex-wrap: wrap; /* Allows sections to stack on smaller screens */
-}
-
-.education-section {
-    flex-basis: 45%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.education-icon {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
+.work1-icon {
+    height: 50px;
     margin-bottom: 15px;
 }
 
-.education-section h3 {
+/* Text Styles for Sections */
+.info-section h3, .education-section h3, .work-section h3, .skill-section h3 {
     margin: 0 0 10px 0;
     color: #333;
 }
 
-.education-section .sub-info {
+.info-section p, .education-section .sub-info, .work-section .sub-info, .skill-section .sub-info {
     color: #666;
 }
 
-.work-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: start;
-    flex-wrap: wrap; /* Allows sections to stack on smaller screens */
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .s-one p { font-size: 1rem; }
+    .scroll-control .icon-svg { width: 20px; height: 20px; margin: 0 15px; }
+    .header h2 { font-size: 1.5rem; }
+    .content p, .content .sub-info { font-size: 0.9rem; }
+    .scroll-control { top: 95%; left: 50%; flex-direction: row; align-items: center; justify-content: center; }
+    .vertical-separator { height: 5px; margin-bottom: 10px; }
+    img { max-width: 100%; height: auto; }
+    input, button, select, textarea { font-size: 16px; }
+    .scroll { height: 100%; }
+    .s-one { padding: 0 50px; }
+    hr { width: 50%; align-items: left; margin-left: 0; }
+    .sidebar { width: 70px; }
 }
 
-.work-section {
-    flex-basis: 45%; /* Adjust as needed */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.work-icon {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
-    margin-bottom: 15px;
-}
-
-.work-section h3 {
-    margin: 0 0 10px 0;
-    color: #333;
-}
-
-.work-section .sub-info {
-    color: #666;
-}
-
-
-.skills-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: start;
-    flex-wrap: wrap; /* Allows sections to stack on smaller screens */
-}
-
-.skill-section {
-    flex-basis: 30%; /* Adjust as needed */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.skill-icon {
-    width: 50px; /* Adjust as needed */
-    height: 50px; /* Adjust as needed */
-    margin-bottom: 15px;
-}
-
-.skill-section h3 {
-    margin: 0 0 10px 0;
-    color: #333;
-}
-
-.skill-section .sub-info {
-    color: #666;
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
