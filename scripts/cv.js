@@ -88,16 +88,8 @@ function applyScroll() {
 
 function screenCheck() {
     var deviceAgent = navigator.userAgent.toLowerCase();
-    var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
-    if (agentID || $(window).width() <= 1024) {
-        // its mobile screen
-        $.scrollify.destroy();
-        $('section').removeClass('scroll').removeAttr('style');
-        $.scrollify.disable();
-    } else {
-        // its desktop
         $('section').addClass('scroll');
         applyScroll();
         $.scrollify.enable();
-    }
+    
 }

@@ -67,8 +67,14 @@
 }
 
 .skill-item {
-    display: inline-block;
-    margin-right: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-name {
+    text-align: center;
 }
 
 .skill-progress {
@@ -78,6 +84,7 @@
     border-radius: 50%;
     position: relative;
     transition: transform 1s ease-out;
+    margin-bottom: 1rem;
 }
 
 .skill-progress .progress-bar,
@@ -132,4 +139,28 @@
     .scroll-control span {
         display: none;
     }
+
+    .container {
+        padding: 0 5%;
+    }
+
+    .scroll h2 {
+        font-size: 2rem;
+    }
+
+    .scroll .date-column .date-text,
+    .scroll .role-column .company-role,
+    .scroll .role-column .institution-role {
+        font-size: 1rem;
+    }
+
+    .scroll .role-column p,
+.scroll .about-text {
+    font-size: 1rem;
+    padding-bottom: 10%;
+}
+
+.s-one .main-title {
+    font-size: 5rem;
+}
 }
