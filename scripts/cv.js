@@ -8,7 +8,7 @@ $(document).ready(function () {
     const progressBars = ['.progress-one', '.progress-two', '.progress-three', '.progress-four', '.progress-five', '.progress-six', '.progress-seven', '.progress-eight', '.progress-nine', '.progress-ten'];
     const colors = ['#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3ca7ba', '#b8ba3c', '#3cba92', '#3cba92', '#3cba92' ];
 
-    const percentages = [70, 70, 60, 40, 10, 70, 50, 10, 10, 70];
+    const percentages = [70, 70, 60, 40, 10, 70, 40, 10, 10, 70];
 
 
     circle.style.strokeDasharray = `${circumference} ${circumference}`;

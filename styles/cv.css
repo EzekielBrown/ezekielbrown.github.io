@@ -194,6 +194,7 @@
 
     .skills-row {
         display: none;
+        
     }
 
     .skill-item {
@@ -202,14 +203,14 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        
+        padding: 0 5%;
     }
 
     .skills-row1 .skill-name {
         flex: 1;
         text-align: left;
         white-space: nowrap;
-        
+        font-size: 1rem;
     }
 
     .line-container {
