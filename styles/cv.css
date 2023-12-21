@@ -163,6 +163,57 @@
     display: none;
 }
 
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.intro-text.fade-in {
+    animation-delay: 1s;
+}
+
+.main-title.fade-in {
+    animation-delay: 0s;
+}
+
+.sub-title.fade-in {
+    animation-delay: 2s;
+}
+
+.about-header.fade-in,
+.about-text.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.about-header.fade-in {
+    animation-delay: 0s;
+}
+
+.about-text.fade-in {
+    animation-delay: 1s;
+}
+
+
+.work-header.fade-in {
+    animation-delay: 0s;
+}
+
+.date-text.fade-in {
+    animation-delay: 1s;
+}
+
+.role-column p.fade-in {
+    animation-delay: 2s;
+}
+
+
+
 @media all and (max-width: 1023px) {
     .scroll-control span {
         display: none;

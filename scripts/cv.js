@@ -6,10 +6,16 @@ $(document).ready(function () {
 
     const sections = ['.s-one', '.s-two', '.s-three', '.s-four', '.s-four', '.s-four', '.s-four', '.s-four', '.s-four', '.s-four'];
     const progressBars = ['.progress-one', '.progress-two', '.progress-three', '.progress-four', '.progress-five', '.progress-six', '.progress-seven', '.progress-eight', '.progress-nine', '.progress-ten'];
-    const colors = ['#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3ca7ba', '#b8ba3c', '#3cba92', '#3cba92', '#3cba92' ];
 
-    const percentages = [70, 70, 60, 40, 10, 70, 40, 10, 10, 70];
+    const colorsDesktop = ['#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3ca7ba', '#b8ba3c', '#3cba92', '#3cba92', '#3cba92' ];
+    const colorsMobile = ['#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3cba92', '#3ca7ba', '#b8ba3c', '#3cba92', '#3cba92', '#3cba92' ]; 
 
+    const colors = window.innerWidth <= 1023 ? colorsMobile : colorsDesktop;
+
+    const percentagesDesktop = [70, 70, 60, 40, 10, 70, 40, 10, 10, 70];
+    const percentagesMobile = [50, 60, 50, 30, 10, 60, 30, 10, 10, 60]; 
+
+    const percentages = window.innerWidth <= 1023 ? percentagesMobile : percentagesDesktop;
 
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
@@ -26,6 +32,30 @@ $(document).ready(function () {
         const offset = circumference - percent / 100 * circumference;
         circle.style.strokeDashoffset = offset;
         document.querySelector(progressBar + ' .circle-percent').textContent = `${Math.floor(percent)}%`;
+    }
+
+    const elements = document.querySelectorAll('.fade-in');
+
+    window.onload = function() {
+        const elements = document.querySelectorAll('.fade-in');
+    
+        const observer = new IntersectionObserver((entries, observer) => {
+            // Loop over the entries
+            entries.forEach(entry => {
+                // If the element is in the viewport
+                if (entry.isIntersecting) {
+                    // Add the fadeIn class to the element
+                    entry.target.classList.add('start');
+    
+                    // Stop observing the element
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+    
+        elements.forEach(element => {
+            observer.observe(element);
+        });
     }
 
     // Function to setup Scrollify plugin
