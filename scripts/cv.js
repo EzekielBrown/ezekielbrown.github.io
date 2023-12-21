@@ -86,7 +86,29 @@ $(document).ready(function () {
             const screenPosition = window.innerHeight / 1.3;
     
             if(sectionPosition < screenPosition) {
-                setProgress(progressBars[i], percentages[i], colors[i]);
+                if(window.innerWidth <= 1023) {
+                    // Update line progress bar
+                    const lineContainer = document.querySelector(progressBars[i] + '-line');
+                    const lineProgress = lineContainer.querySelector('.line-progress');
+                    const linePercent = lineContainer.querySelector('.line-percent');
+    
+                    // Set the color of the line progress
+                    lineProgress.style.backgroundColor = colors[i];
+    
+                    let width = 0;
+                    const interval = setInterval(function() {
+                        if(width >= percentages[i]) {
+                            clearInterval(interval);
+                        } else {
+                            width++;
+                            lineProgress.style.width = width + '%';
+                            linePercent.textContent = width + '%';
+                        }
+                    }, 20);
+                } else {
+                    // Update circle progress bar
+                    setProgress(progressBars[i], percentages[i], colors[i]);
+                }
             }
         }
     });
