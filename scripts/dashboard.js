@@ -34,9 +34,9 @@ fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/l
         });
 
         // update html elements
-        document.getElementById('total-cases').textContent = totalCases;
-        document.getElementById('total-deaths').textContent = totalDeaths;
-        document.getElementById('total-vaccinations').textContent = totalVaccinations;
+        document.getElementById('total-cases').textContent = totalCases.toLocaleString();
+        document.getElementById('total-deaths').textContent = totalDeaths.toLocaleString();
+        document.getElementById('total-vaccinations').textContent = totalVaccinations.toLocaleString();
     });
 
 // World Map
@@ -99,9 +99,10 @@ function ready(error, topo) {
         d3.csvParse(data, function(row) {
           if(row.iso_code === d.id) {
             document.getElementById("info-country").innerHTML = row.location || "n/a";
-            document.getElementById("info-cases").innerHTML = row.total_cases ? parseInt(row.total_cases) : "n/a";
-            document.getElementById("info-deaths").innerHTML = row.total_deaths ? parseInt(row.total_deaths) : "n/a";
-            document.getElementById("info-vaccinated").innerHTML = row.total_vaccinations ? parseInt(row.total_vaccinations) : "n/a";
+            document.getElementById("info-population").innerHTML = row.population ? parseInt(row.population).toLocaleString() : "n/a";
+            document.getElementById("info-cases").innerHTML = row.total_cases ? parseInt(row.total_cases).toLocaleString() : "n/a";
+            document.getElementById("info-deaths").innerHTML = row.total_deaths ? parseInt(row.total_deaths).toLocaleString() : "n/a";
+            document.getElementById("info-vaccinated").innerHTML = row.total_vaccinations ? parseInt(row.total_vaccinations).toLocaleString() : "n/a";
           }
         });
       });
