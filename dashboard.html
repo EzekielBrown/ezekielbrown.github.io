@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="nav">
+        <span class="group-name">Group 9</span>
+        <div class="names">
+            <span>Ezekiel Brown</span>
+            <span>Kang Gao</span>
+            <span>Jens Reijnen</span>
+        </div>
+    </div>
+    <div class="header">
+        <h1 class="header-title">Covid-19 Dashboard</h1>
+    </div>
+    <div class="content">
+        <div class="card card-wide3">
+            <div class="totals">
+                <div>
+                    <h2>Total Cases</h2>
+                    <h3 id="total-cases">...</h3>
+                </div>
+                <div>
+                    <h2>Total Deaths</h2>
+                    <h3 id="total-deaths">...</h3>
+                </div>
+                <div>
+                    <h2>Total Vaccinated</h2>
+                    <h3 id="total-vaccinations">...</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card card-wide2">
+            <svg id="my_dataviz" width="600" height="400"></svg>
+        </div>
+        <div class="card">
+            <h2>Information</h2>
+            <h2>Country</h2>
+            <h3 id="info-country">...</h3>
+            <h2>Cases</h2>
+            <h3 id="info-cases">...</h3>
+            <h2>Deaths</h2>
+            <h3 id="info-deaths">...</h3>
+            <h2>Vaccinated</h2>
+            <h3 id="info-vaccinated">...</h3>
+        </div>
+        <div class="card card-wide2">
+            Timeline of total vaccination
+        </div>
+        <div class="card">
+            Bar graph of top 10 countries with covid
+        </div>
+    </div>
+
+    <script src="http://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
+    <script src="scripts/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</body>
+</html>

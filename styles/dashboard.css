@@ -1,0 +1,95 @@
+* {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/*  Nav bar  */
+.nav {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.names {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.group-name {
+    margin-left: 20px;
+    font-weight: bold;
+
+}
+
+.names span {
+    margin-right: 30px;
+}
+
+/*  Title   */
+
+.header {
+    background-color: #001437;
+    color: white;
+    height: 128px;
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+    margin-left: 20px;
+    font-size: 25px;
+}
+
+
+/*  Main content  */
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px 60px 0 60px
+}
+
+.card {
+    background-color: #f9f9f9; 
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    text-align: center; 
+}
+
+.card h2 {
+    color: #333;
+    margin-bottom: 10px; 
+}
+
+.card h3 {
+    color: #666; 
+    font-size: 24px; 
+}
+
+.card-wide2 {
+    grid-column: span 2;
+}
+
+.card-wide3 {
+    grid-column: span 3;
+}
+
+.totals {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.totals div {
+    padding: 0 40px;
+}
