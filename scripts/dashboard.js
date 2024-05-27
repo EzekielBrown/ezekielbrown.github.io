@@ -366,3 +366,9 @@ document.getElementById("selectButton").addEventListener("change", function() {
 
 // Initialize the graph with default dataset
 timelineGraph("New Cases");
+
+window.onload = function() {
+  worldMap();
+  barGraph();
+  timelineGraph();
+}
