@@ -57,10 +57,16 @@
             <h3 id="info-vaccinated">...</h3>
         </div>
         <div class="card card-wide2">
-            Timeline of total vaccination
+            Timeline
+            <select id="selectButton">
+                <option value="New Cases">New Cases</option>
+                <option value="New Deaths">New Deaths</option>
+            </select>
+            <div id="data-timeline"></div>
         </div>
         <div class="card">
-            Bar graph of top 10 countries with covid
+            Bar graph
+            <div id="my_dataviz1"></div>
         </div>
     </div>
 
@@ -70,5 +76,14 @@
 
     <script src="scripts/dashboard.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <script>
+        window.onload = function() {
+            worldMap();
+            barGraph();
+            timelineGraph();
+        }
+    </script>
+
 </body>
 </html>
