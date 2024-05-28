@@ -96,6 +96,11 @@ body {
     padding: 0 40px;
 }
 
+svg {
+    width: 100%;
+    height: auto;
+}
+
 /* Responsive */
 
 /* Responsive */
@@ -130,7 +135,7 @@ body {
         grid-column: span 1;
     }
 
-        .totals {
+    .totals {
         flex-direction: column;
     }
 

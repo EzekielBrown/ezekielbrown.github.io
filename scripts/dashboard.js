@@ -42,98 +42,116 @@ fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/l
 // World Map
 
 function worldMap() {
+  // The initial dimensions
+  var initialWidth = 600;
+  var initialHeight = 400;
+
   // The svg
-  var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+  var svg = d3.select("svg#my_dataviz")
+      .attr("viewBox", `0 0 ${initialWidth} ${initialHeight}`)
+      .attr("preserveAspectRatio", "xMidYMid meet");
+
+  var width = parseInt(svg.style("width"));
+  var height = parseInt(svg.style("height"));
 
   // Map and projection
   var path = d3.geoPath();
   var projection = d3.geoMercator()
-    .scale(70)
-    .center([0,20])
-    .translate([width / 2, height / 2]);
+      .scale(70)
+      .center([0, 20])
+      .translate([width / 2, height / 2]);
 
   // Data and color scale
   var data = d3.map();
   var colorScale = d3.scaleThreshold()
-    .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-    .range(d3.schemeBlues[7]);
+      .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+      .range(d3.schemeBlues[7]);
 
   // Load external data and boot
   d3.queue()
-    .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-    .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
-    .await(ready);
+      .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+      .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
+      .await(ready);
 
   function ready(error, topo) {
-
-    let mouseOver = function(d) {
-      d3.selectAll(".Country")
-        .transition()
-        .duration(200)
-        .style("opacity", .5)
-      d3.select(this)
-        .transition()
-        .duration(200)
-        .style("opacity", 1)
-        .style("stroke", "black")
-    }
-
-    let mouseLeave = function(d) {
-      d3.selectAll(".Country")
-        .transition()
-        .duration(200)
-        .style("opacity", .8)
-      d3.select(this)
-        .transition()
-        .duration(200)
-        .style("stroke", "transparent")
-    }
-
-  // add mouse click function
-    let mouseClick = function(d) {
-      console.log("Clicked country id: ", d.id);
-      fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-        .then(response => response.text())
-        .then(data => {
-          d3.csvParse(data, function(row) {
-            if(row.iso_code === d.id) {
-              document.getElementById("info-country").innerHTML = row.location || "n/a";
-              document.getElementById("info-population").innerHTML = row.population ? parseInt(row.population).toLocaleString() : "n/a";
-              document.getElementById("info-cases").innerHTML = row.total_cases ? parseInt(row.total_cases).toLocaleString() : "n/a";
-              document.getElementById("info-deaths").innerHTML = row.total_deaths ? parseInt(row.total_deaths).toLocaleString() : "n/a";
-              document.getElementById("info-vaccinated").innerHTML = row.total_vaccinations ? parseInt(row.total_vaccinations).toLocaleString() : "n/a";
-
-              timelineGraph();
-            }
-          });
-        });
-    }
-    
-    // Draw the map
-    svg.append("g")
-      .selectAll("path")
-      .data(topo.features)
-      .enter()
-      .append("path")
-        // draw each country
-        .attr("d", d3.geoPath()
-          .projection(projection)
-        )
-        // set the color of each country
-        .attr("fill", function (d) {
-          d.total = data.get(d.id) || 0;
-          return colorScale(d.total);
-        })
-        .style("stroke", "transparent")
-        .attr("class", function(d){ return "Country" } )
-        .style("opacity", .8)
-        .on("mouseover", mouseOver )
-        .on("mouseleave", mouseLeave )
-        .on("click", mouseClick);
+      let mouseOver = function(d) {
+          d3.selectAll(".Country")
+              .transition()
+              .duration(200)
+              .style("opacity", .5)
+          d3.select(this)
+              .transition()
+              .duration(200)
+              .style("opacity", 1)
+              .style("stroke", "black")
       }
+
+      let mouseLeave = function(d) {
+          d3.selectAll(".Country")
+              .transition()
+              .duration(200)
+              .style("opacity", .8)
+          d3.select(this)
+              .transition()
+              .duration(200)
+              .style("stroke", "transparent")
+      }
+
+      let mouseClick = function(d) {
+          console.log("Clicked country id: ", d.id);
+          fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
+              .then(response => response.text())
+              .then(data => {
+                  d3.csvParse(data, function(row) {
+                      if (row.iso_code === d.id) {
+                          document.getElementById("info-country").innerHTML = row.location || "n/a";
+                          document.getElementById("info-population").innerHTML = row.population ? parseInt(row.population).toLocaleString() : "n/a";
+                          document.getElementById("info-cases").innerHTML = row.total_cases ? parseInt(row.total_cases).toLocaleString() : "n/a";
+                          document.getElementById("info-deaths").innerHTML = row.total_deaths ? parseInt(row.total_deaths).toLocaleString() : "n/a";
+                          document.getElementById("info-vaccinated").innerHTML = row.total_vaccinations ? parseInt(row.total_vaccinations).toLocaleString() : "n/a";
+
+                          timelineGraph();
+                      }
+                  });
+              });
+      }
+
+      // Draw the map
+      svg.append("g")
+          .selectAll("path")
+          .data(topo.features)
+          .enter()
+          .append("path")
+          .attr("d", d3.geoPath()
+              .projection(projection)
+          )
+          .attr("fill", function(d) {
+              d.total = data.get(d.id) || 0;
+              return colorScale(d.total);
+          })
+          .style("stroke", "transparent")
+          .attr("class", function(d) { return "Country" })
+          .style("opacity", .8)
+          .on("mouseover", mouseOver)
+          .on("mouseleave", mouseLeave)
+          .on("click", mouseClick);
+  }
+
+  // Redraw the map on window resize
+  window.addEventListener("resize", function() {
+      // Update width and height based on the new size of the container
+      width = parseInt(svg.style("width"));
+      height = parseInt(svg.style("height"));
+
+      // Update the projection
+      projection
+          .translate([width / 2, height / 2]);
+
+      // Redraw the map
+      svg.selectAll("path").attr("d", path.projection(projection));
+  });
 }
+
 
 function barGraph() {
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
