@@ -33,6 +33,7 @@ body {
     margin-right: 30px;
 }
 
+
 /*  Title   */
 
 .header {
@@ -92,4 +93,29 @@ body {
 
 .totals div {
     padding: 0 40px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .names {
+        display: none;
+    }
+    .header {
+        height: auto;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .header-title {
+        margin-left: 0;
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) {
+    .names {
+        display: flex;
+    }
 }
