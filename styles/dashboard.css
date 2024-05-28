@@ -97,6 +97,7 @@ body {
 
 /* Responsive */
 
+/* Responsive */
 @media (max-width: 768px) {
     .names {
         display: none;
@@ -111,6 +112,21 @@ body {
         margin-left: 0;
         font-size: 18px;
         text-align: center;
+    }
+
+    /* Adjust content grid and card sizes */
+    .content {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .card {
+        margin: 10px 0;
+    }
+
+    .card-wide2,
+    .card-wide3 {
+        grid-column: span 1;
     }
 }
 
