@@ -34,7 +34,6 @@ body {
     margin-right: 30px;
 }
 
-
 /*  Title   */
 
 .header {
@@ -50,12 +49,15 @@ body {
     font-size: 25px;
 }
 
-
 /*  Main content  */
 .content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 20px 60px 0 60px
+    padding: 20px 60px 0 60px;
+    max-width: 1200px; 
+    max-height: auto; 
+    overflow: auto;
+    margin: 0 auto;
 }
 
 .card {
@@ -65,6 +67,7 @@ body {
     margin: 20px; 
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     text-align: center; 
+    
 }
 
 .card h2 {
@@ -101,7 +104,11 @@ svg {
     height: auto;
 }
 
-/* Responsive */
+#my_dataviz {
+    max-width: 100%;
+    max-height: 600px;
+    margin: 0 auto;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -120,7 +127,6 @@ svg {
         text-align: center;
     }
 
-    /* Adjust content grid and card sizes */
     .content {
         grid-template-columns: 1fr;
         padding: 20px;

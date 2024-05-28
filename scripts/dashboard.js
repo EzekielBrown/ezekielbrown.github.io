@@ -42,7 +42,7 @@ fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/l
 // World Map
 
 function worldMap() {
-  // The initial dimensions
+  // Initial dimensions
   var initialWidth = 600;
   var initialHeight = 400;
 
@@ -151,6 +151,7 @@ function worldMap() {
       svg.selectAll("path").attr("d", path.projection(projection));
   });
 }
+
 
 
 function barGraph() {
