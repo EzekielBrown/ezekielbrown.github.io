@@ -129,6 +129,14 @@ body {
     .card-wide3 {
         grid-column: span 1;
     }
+
+    .totals {
+        flex-direction: column;
+    }
+
+    .totals div {
+        padding: 10px 0;
+    }
 }
 
 @media (min-width: 769px) {
