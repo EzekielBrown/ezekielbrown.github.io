@@ -152,8 +152,7 @@ function worldMap() {
   });
 }
 
-
-
+// Bar Graph
 function barGraph() {
   var margin = {top: 10, right: 30, bottom: 30, left: 60},
   width = 260 - margin.left - margin.right,
@@ -220,7 +219,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/ba
 update('var1')
 }
 
-
+// Timeline
 function timelineGraph(datasetName) {
   // Remove existing graph if it exists
   d3.select("#data-timeline svg").remove();
@@ -244,8 +243,8 @@ function timelineGraph(datasetName) {
 
   // Define the two datasets
   var datasets = [
-      {name: "New Cases", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/new_cases.csv"},
-      {name: "New Deaths", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/new_deaths.csv"}
+      {name: "New Cases", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/weekly_cases.csv"},
+      {name: "New Deaths", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/weekly_deaths.csv"}
   ];
 
   // Filter the datasets based on the provided datasetName
