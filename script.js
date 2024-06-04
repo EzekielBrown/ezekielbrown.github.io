@@ -1,450 +1,130 @@
-// Fetch the latest data and display info
-fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-    .then(response => response.text())
-    .then(data => {
+//--------------------------------------------------------------
+// Background Noise function
+//--------------------------------------------------------------
 
-        const parsedData = Papa.parse(data, { header: true }).data;
-        const filteredData = parsedData.filter(row => row['iso_code'] === 'OWID_WRL');
-
-        // get world cases
-        let totalCases = 0;
-        filteredData.forEach(row => {
-            const cases = Number(row['total_cases']);
-            if (!isNaN(cases)) {
-                totalCases += cases;
-            }
-        });
-
-        // get world deaths
-        let totalDeaths = 0;
-        filteredData.forEach(row => {
-            const deaths = Number(row['total_deaths']);
-            if (!isNaN(deaths)) {
-                totalDeaths += deaths;
-            }
-        });
-
-        // get world vaccinations
-        let totalVaccinations = 0;
-        filteredData.forEach(row => {
-            const vaccinations = Number(row['total_vaccinations']);
-            if (!isNaN(vaccinations)) {
-                totalVaccinations += vaccinations;
-            }
-        });
-
-        // update html elements
-        document.getElementById('total-cases').textContent = totalCases.toLocaleString();
-        document.getElementById('total-deaths').textContent = totalDeaths.toLocaleString();
-        document.getElementById('total-vaccinations').textContent = totalVaccinations.toLocaleString();
-    });
-
-// World Map
-
-function worldMap() {
-  // Initial dimensions
-  var initialWidth = 600;
-  var initialHeight = 400;
-
-  // The svg
-  var svg = d3.select("svg#worldmap")
-      .attr("viewBox", `0 0 ${initialWidth} ${initialHeight}`)
-      .attr("preserveAspectRatio", "xMidYMid meet");
-
-  var width = parseInt(svg.style("width"));
-  var height = parseInt(svg.style("height"));
-
-  // Map and projection
-  var path = d3.geoPath();
-  var projection = d3.geoMercator()
-      .scale(70)
-      .center([0, 20])
-      .translate([width / 2, height / 2]);
-
-  // Data and color scale
-  var data = d3.map();
-  var colorScale = d3.scaleThreshold()
-      .domain([10000, 100000, 1000000, 3000000, 10000000, 50000000])
-      .range(d3.schemeBlues[7]);
-
-    // Tooltip
-    var tooltip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
-    // Tooltip data
-    let populationData = new Map();
-    let casesData = new Map();
-    let deathData = new Map();
-  // Load external data and boot
-  d3.queue()
-  .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-  .defer(d3.csv, "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv", function(d) { 
-    data.set(d.iso_code, +d.total_cases); 
-    populationData.set(d.iso_code, +d.population);
-    casesData.set(d.iso_code, +d.total_cases);
-    deathData.set(d.iso_code, +d.total_deaths); 
-  })
-  .await(ready);
-
-  function ready(error, topo) {
-      let mouseOver = function(d) {
-          d3.selectAll(".Country")
-              .transition()
-              .duration(200)
-              .style("opacity", .5)
-          d3.select(this)
-              .transition()
-              .duration(200)
-              .style("opacity", 1)
-              .style("stroke", "black")
-
-              // Tooltip
-            tooltip.transition()
-                .duration(200)
-                .style("opacity", .9);
-            tooltip.html(  
-                d.properties.name + 
-                "<br/>Population: " + (populationData.get(d.id).toLocaleString() || 0) +
-                "<br/>Cases: " + (casesData.get(d.id).toLocaleString() || 0) +
-                "<br/>Deaths: " + (deathData.get(d.id).toLocaleString() || 0)
-            )
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px")
+document.addEventListener("DOMContentLoaded", (event) => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const container = document.getElementById("container");
+    
+    container.style.backgroundSize = `${width}px ${height}px`;
+  
+    const smallCanvas = document.createElement("canvas");
+    const smallCtx = smallCanvas.getContext("2d");
+    smallCanvas.width = width / 1;
+    smallCanvas.height = height / 1;
+  
+    function generateNoise() {
+      const imgData = smallCtx.createImageData(smallCanvas.width, smallCanvas.height);
+      const data = new Uint8ClampedArray(smallCanvas.width * smallCanvas.height * 4);
+  
+      for (let i = 0; i < data.length; i += 4) {
+        const noise = Math.random() * 255;
+        data[i] = noise;
+        data[i + 1] = noise;
+        data[i + 2] = noise;
+        data[i + 3] = 25;
       }
-
-      let mouseLeave = function(d) {
-          d3.selectAll(".Country")
-              .transition()
-              .duration(200)
-              .style("opacity", .8)
-          d3.select(this)
-              .transition()
-              .duration(200)
-              .style("stroke", "transparent")
-
-            // Tooltip leave animation
-              tooltip.transition()
-              .duration(500)
-              .style("opacity", 0);
-      }
-
-      let mouseClick = function(d) {
-          console.log("Clicked country id: ", d.id);
-          fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-              .then(response => response.text())
-              .then(data => {
-                  d3.csvParse(data, function(row) {
-                      if (row.iso_code === d.id) {
-                          document.getElementById("info-country").innerHTML = row.location || "n/a";
-                          document.getElementById("info-population").innerHTML = row.population ? parseInt(row.population).toLocaleString() : "n/a";
-                          document.getElementById("info-cases").innerHTML = row.total_cases ? parseInt(row.total_cases).toLocaleString() : "n/a";
-                          document.getElementById("info-deaths").innerHTML = row.total_deaths ? parseInt(row.total_deaths).toLocaleString() : "n/a";
-                          document.getElementById("info-vaccinated").innerHTML = row.total_vaccinations ? parseInt(row.total_vaccinations).toLocaleString() : "n/a";
-
-                          timelineGraph();
-                      }
-                  });
-              });
-      }
-
-      // Draw the map
-      svg.append("g")
-          .selectAll("path")
-          .data(topo.features)
-          .enter()
-          .append("path")
-          .attr("d", d3.geoPath()
-              .projection(projection)
-          )
-          .attr("fill", function(d) {
-              d.total = data.get(d.id) || 0;
-              return colorScale(d.total);
-          })
-          .style("stroke", "transparent")
-          .attr("class", function(d) { return "Country" })
-          .style("opacity", .8)
-          .on("mouseover", mouseOver)
-          .on("mouseleave", mouseLeave)
-          .on("click", mouseClick);
-  }
-
-  // Redraw the map on window resize
-  window.addEventListener("resize", function() {
-      // Update width and height based on the new size of the container
-      width = parseInt(svg.style("width"));
-      height = parseInt(svg.style("height"));
-
-      // Update the projection
-      projection
-          .translate([width / 2, height / 2]);
-
-      // Redraw the map
-      svg.selectAll("path").attr("d", path.projection(projection));
+  
+      imgData.data.set(data);
+      smallCtx.putImageData(imgData, 0, 0);
+  
+      return smallCanvas.toDataURL();
+    }
+  
+    const patterns = Array.from({ length: 5 }, generateNoise);
+    let currentIndex = 0;
+  
+    function updateNoise() {
+      container.style.backgroundImage = `url(${patterns[currentIndex]})`;
+  
+      currentIndex = (currentIndex + 1) % patterns.length;
+  
+      requestAnimationFrame(updateNoise);
+    }
+  
+    updateNoise();
   });
-}
-
-// Bar Graph
-function barGraph() {
-  var margin = {top: 10, right: 30, bottom: 30, left: 60},
-  width = 260 - margin.left - margin.right,
-  height = 200 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#data-bar")
-.append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-.append("g")
-  .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
-
-// Initialize the X axis
-var x = d3.scaleBand()
-.range([ 0, width ])
-.padding(0.2);
-var xAxis = svg.append("g")
-.attr("transform", "translate(0," + height + ")")
-
-// Initialize the Y axis
-var y = d3.scaleLinear()
-.range([ height, 0]);
-var yAxis = svg.append("g")
-.attr("class", "myYaxis")
-
-
-// A function that create / update the plot for a given variable:
-function update(selectedVar) {
-
-// Parse the Data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/barplot_change_data.csv", function(data) {
-
-  // X axis
-  x.domain(data.map(function(d) { return d.group; }))
-  xAxis.transition().duration(1000).call(d3.axisBottom(x))
-
-  // Add Y axis
-  y.domain([0, d3.max(data, function(d) { return +d[selectedVar] }) ]);
-  yAxis.transition().duration(1000).call(d3.axisLeft(y));
-
-  // variable u: map data to existing bars
-  var u = svg.selectAll("rect")
-    .data(data)
-
-  // update bars
-  u
-    .enter()
-    .append("rect")
-    .merge(u)
-    .transition()
-    .duration(1000)
-      .attr("x", function(d) { return x(d.group); })
-      .attr("y", function(d) { return y(d[selectedVar]); })
-      .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d[selectedVar]); })
-      .attr("fill", "#69b3a2")
-})
-
-}
-
-// Initialize plot
-update('var1')
-}
-
-// Timeline
-function timelineGraph(datasetName) {
-  // Remove existing graph if it exists
-  d3.select("#data-timeline svg").remove();
-
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 30, left: 60},
-      width = 660 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-
-  // append the svg object to the body of the page
-  var svg = d3.select("#data-timeline")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  // get selected country
-  var selectedCountry = document.getElementById("info-country") ? document.getElementById("info-country").innerHTML.trim() : "World";
-  console.log("Selected country:", selectedCountry); // log
-
-  var datasets = [
-      {name: "New Cases", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/weekly_cases.csv"},
-      {name: "New Deaths", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/weekly_deaths.csv"}
+  
+  
+  
+  //--------------------------------------------------------------
+  // Random word function
+  //--------------------------------------------------------------
+  
+  const words = [
+    "Coder.",
+    "Designer.",
+    "Thinker.",
+    "Web Developer.",
+    "Leader.",
+    "Python.",
+    "Maori.",
+    "Student.",
+    "Footballer.",
+    "Tinkerer.",
   ];
-
-  // filter the datasets based on the provided datasetName
-  datasets = datasets.filter(function(d) {
-      return d.name === datasetName;
-  });
-
-  // Load the data
-  var promises = datasets.map(function(d) {
-      return new Promise(function(resolve, reject) {
-          d3.csv(d.url, function(error, data) {
-              if (error) reject(error);
-              else resolve({name: d.name, data: data});
-          });
-      });
-  });
-
-  Promise.all(promises)
-      .then(function(values) {       
-          var combinedData = [];
-          values.forEach(function(dataset) {
-              dataset.data.forEach(function(row) {
-                  var date = new Date(row.date);
-                  var value = +row[selectedCountry];
-                  if (!isNaN(value)) {
-                      combinedData.push({
-                          date: date,
-                          value: value,
-                          type: dataset.name
-                      });
-                  }
-              });
-          });
-
-          // Add X axis 
-          var x = d3.scaleTime()
-              .domain([d3.min(combinedData, function(d) { return d.date; }), new Date()])
-              .range([ 0, width ]);
-          var xAxis = svg.append("g")
-              .attr("transform", "translate(0," + height + ")")
-              .call(d3.axisBottom(x).ticks(7));
-
-          // Add Y axis
-          var y = d3.scaleLinear()
-              .domain([0, d3.max(combinedData, function(d) { return d.value; })])
-              .range([ height, 0 ]);
-          var yAxis = svg.append("g")
-              .call(d3.axisLeft(y));
-
-          // Add a clipPath: everything out of this area won't be drawn.
-          var clip = svg.append("defs").append("svg:clipPath")
-              .attr("id", "clip")
-              .append("svg:rect")
-              .attr("width", width )
-              .attr("height", height )
-              .attr("x", 0)
-              .attr("y", 0);
-
-          // Add brushing
-          var brush = d3.brushX()
-              .extent([ [0,0], [width,height] ])
-              .on("end", updateChart);
-
-          // Create the line variable: where both the line and the brush take place
-          var line = svg.append('g')
-              .attr("clip-path", "url(#clip)");
-
-          // Draw the lines
-          var linePath = d3.line()
-              .x(function(d) { return x(d.date); })
-              .y(function(d) { return y(d.value); });
-
-          var groupedData = d3.nest()
-              .key(function(d) { return d.type; })
-              .entries(combinedData);
-
-          groupedData.forEach(function(group) {
-              line.append("path")
-                  .datum(group.values)
-                  .attr("class", "line")
-                  .attr("fill", "none")
-                  .attr("stroke", group.key === "New Cases" ? "steelblue" : "red")
-                  .attr("stroke-width", 1.5)
-                  .attr("d", linePath);
-          });
-
-          // Add the brushing
-          line
-              .append("g")
-              .attr("class", "brush")
-              .call(brush);
-
-          // A function that set idleTimeOut to null
-          var idleTimeout;
-          function idled() { idleTimeout = null; }
-
-          // A function that update the chart for given boundaries
-          function updateChart() {
-              // What are the selected boundaries?
-              var extent = d3.event.selection;
-
-              // If no selection, back to initial coordinate. Otherwise, update X axis domain
-              if(!extent){
-                  if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-                  x.domain([d3.min(combinedData, function(d) { return d.date; }), new Date()]);
-              }else{
-                  x.domain([ x.invert(extent[0]), x.invert(extent[1]) ]);
-                  line.select(".brush").call(brush.move, null); // This removes the grey brush area as soon as the selection has been done
-              }
-
-              // Update axis and line position
-              xAxis.transition().duration(1000).call(d3.axisBottom(x));
-              line.selectAll(".line")
-                  .transition()
-                  .duration(1000)
-                  .attr("d", linePath);
-          }
-
-          // If user double click, reinitialize the chart
-          svg.on("dblclick", function(){
-              x.domain([d3.min(combinedData, function(d) { return d.date; }), new Date()]);
-              xAxis.transition().call(d3.axisBottom(x));
-              line.selectAll(".line")
-                  .transition()
-                  .attr("d", linePath);
-          });
-      })
-      .catch(function(error) {
-          console.error("Error loading the CSV data:", error);
-      });
-}
-
-document.getElementById("selectButton").addEventListener("change", function() {
-  timelineGraph(this.value);
-});
-
-
-timelineGraph("New Cases");
-
-// last update subheader
-function lastUpdate() {
-    fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-    .then(response => response.text())
-    .then(data => {
-        const rows = data.split('\n');
-        const headers = rows[0].split(',');
-        const lastUpdatedIndex = headers.indexOf('last_updated_date');
-
-        let mostRecentDate = '';
-        for (let i = 1; i < rows.length; i++) {
-            const row = rows[i].split(',');
-            if (row[lastUpdatedIndex] > mostRecentDate) {
-                mostRecentDate = row[lastUpdatedIndex];
-            }
-        }
-
-        // Convert date
-        const dateParts = mostRecentDate.split('-');
-        const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
-
-        // Show recent
-        document.querySelector('.header-sub').textContent = `*last update: ${formattedDate}`;
+  
+  const DEFAULT_WORD = "Ezekiel";
+  
+  function fadeOutLetters() {
+    const letters = textElement.querySelectorAll("span");
+    letters.forEach((letter, index) => {
+      setTimeout(() => {
+        letter.classList.add("faded");
+      }, index * 150);
     });
-}
-
-
-window.onload = function() {
-    lastUpdate();
-    worldMap();
-    barGraph();
-    timelineGraph("New Cases");
-}
+  }
+  
+  function fadeInLetters() {
+    const letters = textElement.querySelectorAll("span");
+    letters.forEach((letter, index) => {
+      setTimeout(() => {
+        letter.classList.remove("faded");
+      }, index * 150);
+    });
+  }
+  
+  let currentWord = DEFAULT_WORD;
+  
+  function setWord(newWord) {
+    textElement.innerHTML = "";
+  
+    for (let i = 0; i < newWord.length; i++) {
+      let char = newWord[i] === " " ? "\u00A0" : newWord[i];
+      const newSpan = document.createElement("span");
+      newSpan.textContent = char;
+      newSpan.classList.add("faded");
+      textElement.appendChild(newSpan);
+    }
+  }
+  
+  function changeWord() {
+    fadeOutLetters();
+  
+    setTimeout(() => {
+      let randomWord;
+      do {
+        randomWord = words[Math.floor(Math.random() * words.length)];
+      } while (randomWord === currentWord);
+  
+      currentWord = randomWord;
+      setWord(randomWord);
+  
+      setTimeout(fadeInLetters, 500);
+  
+      setTimeout(() => {
+        fadeOutLetters();
+        setTimeout(() => {
+          setWord(DEFAULT_WORD);
+          currentWord = DEFAULT_WORD;
+          setTimeout(fadeInLetters, 500);
+          setTimeout(changeWord, 4000);
+        }, 2000);
+      }, 4000);
+    }, 2000);
+  }
+  
+  setWord(DEFAULT_WORD);
+  fadeInLetters();
+  setTimeout(changeWord, 4000);

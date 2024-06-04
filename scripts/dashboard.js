@@ -47,7 +47,7 @@ function worldMap() {
   var initialHeight = 400;
 
   // The svg
-  var svg = d3.select("svg#my_dataviz")
+  var svg = d3.select("svg#worldmap")
       .attr("viewBox", `0 0 ${initialWidth} ${initialHeight}`)
       .attr("preserveAspectRatio", "xMidYMid meet");
 
@@ -64,14 +64,28 @@ function worldMap() {
   // Data and color scale
   var data = d3.map();
   var colorScale = d3.scaleThreshold()
-      .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+      .domain([10000, 100000, 1000000, 3000000, 10000000, 50000000])
       .range(d3.schemeBlues[7]);
 
+    // Tooltip
+    var tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    // Tooltip data
+    let populationData = new Map();
+    let casesData = new Map();
+    let deathData = new Map();
   // Load external data and boot
   d3.queue()
-      .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-      .defer(d3.csv, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv", function(d) { data.set(d.code, +d.pop); })
-      .await(ready);
+  .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+  .defer(d3.csv, "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv", function(d) { 
+    data.set(d.iso_code, +d.total_cases); 
+    populationData.set(d.iso_code, +d.population);
+    casesData.set(d.iso_code, +d.total_cases);
+    deathData.set(d.iso_code, +d.total_deaths); 
+  })
+  .await(ready);
 
   function ready(error, topo) {
       let mouseOver = function(d) {
@@ -84,6 +98,19 @@ function worldMap() {
               .duration(200)
               .style("opacity", 1)
               .style("stroke", "black")
+
+              // Tooltip
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltip.html(  
+                d.properties.name + 
+                "<br/>Population: " + (populationData.get(d.id).toLocaleString() || 0) +
+                "<br/>Cases: " + (casesData.get(d.id).toLocaleString() || 0) +
+                "<br/>Deaths: " + (deathData.get(d.id).toLocaleString() || 0)
+            )
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
       }
 
       let mouseLeave = function(d) {
@@ -95,6 +122,11 @@ function worldMap() {
               .transition()
               .duration(200)
               .style("stroke", "transparent")
+
+            // Tooltip leave animation
+              tooltip.transition()
+              .duration(500)
+              .style("opacity", 0);
       }
 
       let mouseClick = function(d) {
@@ -159,7 +191,7 @@ function barGraph() {
   height = 200 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz1")
+var svg = d3.select("#data-bar")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -237,17 +269,16 @@ function timelineGraph(datasetName) {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  // Get selected country
+  // get selected country
   var selectedCountry = document.getElementById("info-country") ? document.getElementById("info-country").innerHTML.trim() : "World";
-  console.log("Selected country:", selectedCountry); // Debugging statement
+  console.log("Selected country:", selectedCountry); // log
 
-  // Define the two datasets
   var datasets = [
       {name: "New Cases", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/weekly_cases.csv"},
       {name: "New Deaths", url: "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/jhu/weekly_deaths.csv"}
   ];
 
-  // Filter the datasets based on the provided datasetName
+  // filter the datasets based on the provided datasetName
   datasets = datasets.filter(function(d) {
       return d.name === datasetName;
   });
@@ -264,7 +295,6 @@ function timelineGraph(datasetName) {
 
   Promise.all(promises)
       .then(function(values) {       
-          // Combine and process data
           var combinedData = [];
           values.forEach(function(dataset) {
               dataset.data.forEach(function(row) {
@@ -280,7 +310,7 @@ function timelineGraph(datasetName) {
               });
           });
 
-          // Add X axis --> it is a date format
+          // Add X axis 
           var x = d3.scaleTime()
               .domain([d3.min(combinedData, function(d) { return d.date; }), new Date()])
               .range([ 0, width ]);
@@ -382,11 +412,39 @@ document.getElementById("selectButton").addEventListener("change", function() {
   timelineGraph(this.value);
 });
 
-// Initialize the graph with default dataset
+
 timelineGraph("New Cases");
 
+// last update subheader
+function lastUpdate() {
+    fetch('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
+    .then(response => response.text())
+    .then(data => {
+        const rows = data.split('\n');
+        const headers = rows[0].split(',');
+        const lastUpdatedIndex = headers.indexOf('last_updated_date');
+
+        let mostRecentDate = '';
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i].split(',');
+            if (row[lastUpdatedIndex] > mostRecentDate) {
+                mostRecentDate = row[lastUpdatedIndex];
+            }
+        }
+
+        // Convert date
+        const dateParts = mostRecentDate.split('-');
+        const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+
+        // Show recent
+        document.querySelector('.header-sub').textContent = `*last update: ${formattedDate}`;
+    });
+}
+
+
 window.onload = function() {
-  worldMap();
-  barGraph();
-  timelineGraph();
+    lastUpdate();
+    worldMap();
+    barGraph();
+    timelineGraph("New Cases");
 }
