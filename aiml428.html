@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Quiz</title>
+    <link rel="stylesheet" href="styles/aiml428.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="quiz-container">
+            <div id="header">
+                <span id="question-number"></span>
+                <span id="score"></span>
+            </div>
+            <h1 id="question"></h1>
+            <div id="options"></div>
+            <button id="next" onclick="nextQuestion()" class="hidden next-button">Next Question</button>
+        </div>
+        <div id="result-container" class="hidden">
+            <h1>Your final score is <span id="final-score"></span></h1>
+            <button id="restart" onclick="restartQuiz()"><i class="fas fa-redo"></i></button>
+        </div>
+    </div>
+    <script src="scripts/aiml428.js"></script>
+</body>
+</html>
