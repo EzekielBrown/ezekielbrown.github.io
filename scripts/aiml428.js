@@ -49,7 +49,7 @@ const quizzes = {
                 "Implementing rule-based systems and manual feature engineering.",
                 "Using hybrid models and leveraging more contextual information."
             ],
-            correct: 4
+            correct: 3
         },
 
         // Text Classification
