@@ -1,105 +1,232 @@
 const quizzes = {
     quiz1: [
+        // Text Representation
         {
-            question: "Very briefly describe two commonly used models for document representation. Which one is better in the context of text classification? Justify your answer.",
+            question: "Very briefly describe two commonly used models for document representation.",
             options: [
-                "Bag of Words (BoW) and TF-IDF. TF-IDF is better because it reduces the impact of common words and emphasizes unique words that are more informative for classification.",
-                "LDA and BoW. BoW is better because it ignores grammar and word order, making it simpler.",
-                "Word2Vec and LDA. LDA is better because it captures the topic distribution in documents.",
-                "TF-IDF and LSI. LSI is better because it reduces dimensionality using SVD."
+                "Bag of Words (BoW) and TF-IDF",
+                "LDA and BoW",
+                "Word2Vec and LDA",
+                "TF-IDF and LSI"
             ],
             correct: 0
+        },
+        {
+            question: "Which document representation model is better in the context of text classification? Justify your answer.",
+            options: [
+                "Bag of Words because it captures word frequency.",
+                "TF-IDF because it reduces the impact of common words and emphasizes unique words.",
+                "LDA because it captures topic distributions.",
+                "Word2Vec because it captures word semantics."
+            ],
+            correct: 1
         },
         {
             question: "Briefly describe how Word2Vec works and name its two different models.",
             options: [
-                "Word2Vec is a neural network-based approach to learning word embeddings. The two models are Skip-Gram and Continuous Bag of Words (CBOW).",
-                "Word2Vec is a count-based model that uses co-occurrence matrices. The two models are Skip-Gram and Continuous Bag of Words (CBOW).",
-                "Word2Vec is a rule-based model that uses predefined word pairs. The two models are GloVe and fastText.",
-                "Word2Vec is a statistical model that uses term frequency. The two models are LDA and LSI."
+                "Word2Vec uses a neural network to learn word associations; the two models are Skip-Gram and Continuous Bag of Words (CBOW).",
+                "Word2Vec uses co-occurrence matrices to capture word relationships; the two models are Skip-Gram and CBOW.",
+                "Word2Vec is a statistical model that uses term frequency; the two models are LDA and LSI.",
+                "Word2Vec is a rule-based model using predefined word pairs; the two models are GloVe and fastText."
             ],
             correct: 0
         },
         {
-            question: "In your opinion, what are the main limitations of the current text representation models? Suggest some solutions that may address these limitations.",
+            question: "What are the main limitations of current text representation models?",
             options: [
-                "Limitations: High-dimensional sparse vectors, polysemy. Solutions: Use advanced embeddings like GloVe, fastText, contextualized embeddings like BERT, GPT, and hybrid models.",
-                "Limitations: Capturing semantic meaning, ignoring word frequency. Solutions: Use BoW and TF-IDF.",
-                "Limitations: Ignoring grammar, low-dimensional vectors. Solutions: Use more complex models like LDA and LSI.",
-                "Limitations: Handling large corpora, ignoring semantics. Solutions: Use rule-based approaches and dictionaries."
+                "They are computationally expensive and require a lot of memory.",
+                "They fail to capture the semantic meaning and context of words.",
+                "They are too simple and cannot handle large datasets.",
+                "They are too complex and hard to implement."
+            ],
+            correct: 1
+        },
+        {
+            question: "Suggest some solutions that may address the limitations of current text representation models.",
+            options: [
+                "Using more sophisticated algorithms like neural networks and increasing computational power.",
+                "Simplifying the models and reducing the dataset size.",
+                "Implementing rule-based systems and manual feature engineering.",
+                "Using hybrid models and leveraging more contextual information."
+            ],
+            correct: 4
+        },
+
+        // Text Classification
+        {
+            question: "What are the main steps to process text data for a simple classifier such as K Nearest Neighbour in Python?",
+            options: [
+                "Tokenize text, remove stop words, vectorize text, train classifier",
+                "Tokenize text, convert to lowercase, train classifier",
+                "Remove stop words, vectorize text, train classifier",
+                "Convert text to lowercase, remove punctuation, train classifier"
             ],
             correct: 0
         },
         {
-            question: "What are the main differences between text classification and text clustering? Name one evaluation measure for classification and one for clustering, and briefly explain how they are calculated.",
+            question: "Very briefly explain what a convolutional layer does in the context of image classification.",
             options: [
-                "Text classification is supervised, assigning predefined labels. Text clustering is unsupervised, grouping based on similarities. Evaluation measures: Accuracy (classification) and Silhouette Score (clustering).",
-                "Text classification is unsupervised, grouping documents based on similarities. Text clustering is supervised, assigning predefined labels. Evaluation measures: Precision (classification) and F1-Score (clustering).",
-                "Text classification is supervised, grouping documents based on similarities. Text clustering is unsupervised, assigning predefined labels. Evaluation measures: Silhouette Score (classification) and Accuracy (clustering).",
-                "Text classification is supervised, assigning predefined labels. Text clustering is unsupervised, grouping based on similarities. Evaluation measures: F1-Score (classification) and Precision (clustering)."
+                "It captures spatial hierarchies in images through convolution operations.",
+                "It reduces the dimensions of the input image.",
+                "It transforms the input image into feature vectors.",
+                "It normalizes the input image."
             ],
             correct: 0
         },
         {
-            question: "What are the main challenges in natural language understanding?",
+            question: "Very briefly explain what a pooling layer does in the context of image classification.",
             options: [
-                "Challenges: Ambiguity, context understanding, variability, complexity, idiomatic expressions.",
-                "Challenges: Context understanding, uniformity, variability, complexity, idiomatic expressions.",
-                "Challenges: Ambiguity, context understanding, uniformity, complexity, idiomatic expressions.",
-                "Challenges: Ambiguity, context understanding, variability, complexity, literal expressions."
+                "It captures spatial hierarchies in images through convolution operations.",
+                "It reduces the dimensions of the input image by summarizing regions.",
+                "It transforms the input image into feature vectors.",
+                "It normalizes the input image."
+            ],
+            correct: 1
+        },
+        {
+            question: "Explain the main differences between CNN for image classification and CNN for text classification.",
+            options: [
+                "CNN for image classification uses pixels; CNN for text classification uses word embeddings.",
+                "CNN for image classification uses convolutional layers; CNN for text classification uses RNN layers.",
+                "CNN for image classification processes sequential data; CNN for text classification processes spatial data.",
+                "CNN for image classification uses pooling layers; CNN for text classification does not."
+            ],
+            correct: 0
+        },
+
+        // Text Clustering
+        {
+            question: "What is the main difference between text classification and text clustering?",
+            options: [
+                "Classification requires labeled data; clustering does not.",
+                "Classification uses unsupervised learning; clustering uses supervised learning.",
+                "Classification is based on proximity; clustering is based on predefined labels.",
+                "Classification groups data based on semantics; clustering groups data based on syntax."
             ],
             correct: 0
         },
         {
-            question: "Describe a basic algorithm that Google uses to rank search results. Explain its advantages and disadvantages.",
+            question: "Name one evaluation measure for classification and one for clustering.",
             options: [
-                "PageRank: Ranks pages based on backlink quality and quantity. Advantages: Relevance, simplicity. Disadvantages: Manipulation, popularity bias.",
-                "HITS: Ranks pages based on hub and authority scores. Advantages: Relevance, simplicity. Disadvantages: Manipulation, popularity bias.",
-                "TF-IDF: Ranks pages based on term frequency. Advantages: Relevance, complexity. Disadvantages: Manipulation, popularity bias.",
-                "BM25: Ranks pages based on term frequency and document length. Advantages: Relevance, simplicity. Disadvantages: Manipulation, popularity bias."
+                "Accuracy and Silhouette Score",
+                "Precision and Recall",
+                "F1 Score and Confusion Matrix",
+                "Precision and ROC-AUC"
             ],
             correct: 0
+        },
+        {
+            question: "Suppose you want to design a system that automatically groups all the unique words in a book into different clusters, so that the words in the same cluster are semantically related. Describe how you are going to represent the data.",
+            options: [
+                "Using TF-IDF vectors.",
+                "Using word frequency counts.",
+                "Using Word2Vec embeddings.",
+                "Using one-hot encoding."
+            ],
+            correct: 2
+        },
+        {
+            question: "Which clustering algorithm might you use for the above system and why?",
+            options: [
+                "K-means because it is simple and effective for large datasets.",
+                "DBSCAN because it handles noise well.",
+                "Hierarchical clustering because it creates a tree of clusters.",
+                "Gaussian Mixture Models because they assume Gaussian distribution."
+            ],
+            correct: 0
+        },
+        {
+            question: "How would you evaluate the performance of your clustering system?",
+            options: [
+                "Using Silhouette Score to measure how similar objects are within a cluster and how different they are from objects in other clusters.",
+                "Using Accuracy to measure the correctness of clusters.",
+                "Using F1 Score to measure the balance between precision and recall.",
+                "Using Confusion Matrix to evaluate the classification performance."
+            ],
+            correct: 0
+        },
+        {
+            question: "Name at least five clustering algorithms.",
+            options: [
+                "K-means, DBSCAN, Hierarchical clustering, Gaussian Mixture Models, Spectral clustering",
+                "K-means, Decision Trees, SVM, Random Forest, Naive Bayes",
+                "LDA, PCA, SVD, ICA, NMF",
+                "Gradient Descent, K-means, DBSCAN, Hierarchical clustering, SVM"
+            ],
+            correct: 0
+        },
+        {
+            question: "Choose one clustering algorithm and very briefly outline how it works.",
+            options: [
+                "K-means: It partitions data into K clusters by minimizing the variance within each cluster.",
+                "Decision Trees: It splits the data into branches based on feature values.",
+                "PCA: It reduces dimensionality by transforming data into principal components.",
+                "Gradient Descent: It optimizes the loss function to find the best model parameters."
+            ],
+            correct: 0
+        },
+        {
+            question: "Describe one application or task where the chosen algorithm would perform poorly, explaining the reasons why it would not be suitable.",
+            options: [
+                "K-means would perform poorly on data with non-convex shapes or varying cluster densities because it assumes spherical clusters of similar size.",
+                "Decision Trees would perform poorly on high-dimensional data because they are prone to overfitting.",
+                "PCA would perform poorly on non-linear data because it assumes linear relationships.",
+                "Gradient Descent would perform poorly on large datasets because it requires multiple iterations."
+            ],
+            correct: 0
+        },
+
+        // Web Intelligence
+        {
+            question: "Suppose you want to design a house recommender system to help people to find the right house to buy. What are the challenges?",
+            options: [
+                "Data sparsity and handling user preferences",
+                "Lack of user feedback and real-time data processing",
+                "Handling large datasets and feature extraction",
+                "User privacy and scalability issues"
+            ],
+            correct: 0
+        },
+        {
+            question: "Which approach is most suitable for house recommendation? Justify your answer.",
+            options: [
+                "Content-based filtering because it uses item features to recommend similar items.",
+                "Collaborative filtering because it leverages user preferences to recommend items.",
+                "Hybrid approach because it combines both content-based and collaborative filtering for better accuracy.",
+                "Matrix factorization because it reduces dimensionality and captures latent factors."
+            ],
+            correct: 2
         },
         {
             question: "What are the main approaches in query expansion?",
             options: [
-                "Approaches: Manual/expert-based, automatic relevance feedback, thesaurus-based, ontology-based.",
-                "Approaches: Manual/expert-based, automatic relevance feedback, dictionary-based, rule-based.",
-                "Approaches: Automatic relevance feedback, thesaurus-based, dictionary-based, ontology-based.",
-                "Approaches: Manual/expert-based, automatic relevance feedback, thesaurus-based, dictionary-based."
+                "Relevance feedback and synonym-based expansion",
+                "Semantic analysis and context awareness",
+                "Synonym-based expansion and context modeling",
+                "Relevance feedback and hierarchical clustering"
             ],
             correct: 0
         },
         {
-            question: "Suppose you want to design a house recommender system to help people find the right house to buy. What are the challenges? Which approach is most suitable for house recommendation? Justify your answer.",
+            question: "State the main challenges in natural language understanding.",
             options: [
-                "Challenges: Heterogeneous data, dynamic listings, personalization, cold start. Hybrid approach (content-based + collaborative filtering) is suitable for addressing these challenges.",
-                "Challenges: High-dimensional data, static listings, uniform preferences. Collaborative filtering is suitable for addressing these challenges.",
-                "Challenges: Low-dimensional data, dynamic listings, uniform preferences. Content-based filtering is suitable for addressing these challenges.",
-                "Challenges: Homogeneous data, static listings, personalization, cold start. Content-based filtering is suitable for addressing these challenges."
+                "Ambiguity and diversity of language",
+                "Processing speed and memory constraints",
+                "Syntax parsing and semantic analysis",
+                "Real-time processing and language translation"
             ],
             correct: 0
         },
         {
-            question: "Name at least five clustering algorithms. Choose one algorithm and very briefly outline how it works. Describe one application or task where the chosen algorithm would perform poorly, explaining the reasons why it would not be suitable.",
+            question: "Describe a basic algorithm that Google uses to rank the search results. Explain its advantages and disadvantages.",
             options: [
-                "K-Means, Hierarchical Clustering, DBSCAN, GMM, Agglomerative Clustering. K-Means clusters data into K groups by minimizing within-cluster variance. Performs poorly with clusters of varying density, such as social network data.",
-                "K-Means, Hierarchical Clustering, DBSCAN, GMM, Agglomerative Clustering. DBSCAN clusters data based on density. Performs poorly with clusters of varying density, such as social network data.",
-                "K-Means, LDA, DBSCAN, GMM, Agglomerative Clustering. LDA clusters based on density. Performs poorly with clusters of varying density, such as social network data.",
-                "K-Means, Hierarchical Clustering, DBSCAN, GMM, LDA. DBSCAN clusters based on density. Performs poorly with clusters of varying density, such as social network data."
+                "PageRank: It ranks pages based on the number and quality of links. Advantage: It leverages link structure. Disadvantage: It can be manipulated by link farms.",
+                "TF-IDF: It ranks pages based on term frequency. Advantage: It emphasizes important words. Disadvantage: It ignores semantic meaning.",
+                "BM25: It ranks pages based on term frequency and document length. Advantage: It balances relevance and length. Disadvantage: It requires parameter tuning.",
+                "Latent Semantic Indexing: It ranks pages based on latent topics. Advantage: It captures semantic meaning. Disadvantage: It is computationally expensive."
             ],
             correct: 0
-        },
-        {
-            question: "Suppose you want to design a system that automatically groups all the unique words in a book into different clusters, so that the words in the same cluster are semantically related. Describe how you are going to represent the data, what clustering algorithm you might use and why, and how you are going to evaluate the performance of your system.",
-            options: [
-                "Represent words using embeddings (Word2Vec). Use K-Means for clustering. Evaluate using Silhouette Score.",
-                "Represent words using LDA. Use DBSCAN for clustering. Evaluate using Precision.",
-                "Represent words using TF-IDF. Use Agglomerative Clustering. Evaluate using F1-Score.",
-                "Represent words using BoW. Use GMM for clustering. Evaluate using Silhouette Score."
-            ],
-            correct: 0
-        }        
+        }
     ],
     quiz2: [
         {
