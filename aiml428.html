@@ -9,18 +9,55 @@
 </head>
 <body>
     <div class="container">
-        <div id="quiz-container">
-            <div id="header">
-                <span id="question-number"></span>
-                <span id="score"></span>
-            </div>
-            <h1 id="question"></h1>
-            <div id="options"></div>
-            <button id="next" onclick="nextQuestion()" class="hidden next-button">Next Question</button>
+        <div class="tabs">
+            <button class="tab-button" onclick="showQuiz('quiz1')">2019 Exam</button>
+            <button class="tab-button" onclick="showQuiz('quiz2')">2018 Exam</button>
+            <button class="tab-button" onclick="showQuiz('quiz3')">Random Questions</button>
         </div>
-        <div id="result-container" class="hidden">
-            <h1>Your final score is <span id="final-score"></span></h1>
-            <button id="restart" onclick="restartQuiz()"><i class="fas fa-redo"></i></button>
+        <div id="quiz1" class="quiz-content">
+            <div id="quiz-container1" class="quiz-container">
+                <div id="header1" class="header">
+                    <span id="question-number1"></span>
+                    <span id="score1"></span>
+                </div>
+                <h1 id="question1"></h1>
+                <div id="options1"></div>
+                <button id="next1" onclick="nextQuestion('quiz1')" class="hidden next-button">Next Question</button>
+            </div>
+            <div id="result-container1" class="result-container hidden">
+                <h1>Your final score is <span id="final-score1"></span></h1>
+                <button id="restart1" onclick="restartQuiz('quiz1')"><i class="fas fa-redo"></i></button>
+            </div>
+        </div>
+        <div id="quiz2" class="quiz-content hidden">
+            <div id="quiz-container2" class="quiz-container">
+                <div id="header2" class="header">
+                    <span id="question-number2"></span>
+                    <span id="score2"></span>
+                </div>
+                <h1 id="question2"></h1>
+                <div id="options2"></div>
+                <button id="next2" onclick="nextQuestion('quiz2')" class="hidden next-button">Next Question</button>
+            </div>
+            <div id="result-container2" class="result-container hidden">
+                <h1>Your final score is <span id="final-score2"></span></h1>
+                <button id="restart2" onclick="restartQuiz('quiz2')"><i class="fas fa-redo"></i></button>
+            </div>
+        </div>
+        <div id="quiz3" class="quiz-content hidden">
+            <div id="quiz-container3" class="quiz-container">
+                <div id="header3" class="header">
+                    <span id="question-number3"></span>
+                    <span id="score3"></span>
+                </div>
+                <h1 id="question3"></h1>
+                <div id="options3"></div>
+                <button id="next3" onclick="nextQuestion('quiz3')" class="hidden next-button">Next Question</button>
+            </div>
+            <div id="result-container3" class="result-container hidden">
+                <h1>Your final score is <span id="final-score3"></span></h1>
+                <button id="restart3" onclick="restartQuiz('quiz3')"><i class="fas fa-redo"></i></button>
+            </div>
         </div>
     </div>
     <script src="scripts/aiml428.js"></script>
