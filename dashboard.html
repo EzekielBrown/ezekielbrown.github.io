@@ -60,17 +60,45 @@
         </div>
         <div class="card card-wide2">
             Timeline
-            <select id="selectButton">
-                <option value="New Cases">New Cases</option>
-                <option value="New Deaths">New Deaths</option>
-            </select>
+            <div id="bar-tooltip"></div>
             <div id="data-timeline"></div>
+            <div id="chart"></div>
         </div>
         <div class="card">
-            Bar graph
-            <div id="data-bar"></div>
+            <div class="toggle-wrapper">
+                <div class="toggle-wrapper" id="casesDeathsToggle">
+                        <label>
+                            <h2>New Cases</h2>
+                            <input type="checkbox" name="casesDeathsToggle" value="new_cases" checked>    
+                        </label>
+                        <label>
+                            <h2>New Deaths</h2>
+                            <input type="checkbox" name="casesDeathsToggle" value="new_deaths" checked>
+                        </label>
+                </div>
+                <hr class="section-divider">
+                <div class="toggle-wrapper" id="casesDeathsToggle">
+                    <label>
+                        <h2>Total Vaccinations</h2>
+                        <input type="radio" name="vaccinationToggle" value="total_vaccinations" checked>
+                    </label>
+                    <label>
+                        <h2>People Vaccinated</h2>
+                        <input type="radio" name="vaccinationToggle" value="people_vaccinated">  
+                    </label>
+                    <label>
+                        <h2>Fully Vaccinated</h2>
+                        <input type="radio" name="vaccinationToggle" value="people_fully_vaccinated">  
+                    </label>
+                    <label>
+                        <h2>Total Boosters</h2>
+                        <input type="radio" name="vaccinationToggle" value="total_boosters">
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
+
 
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
