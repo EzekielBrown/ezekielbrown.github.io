@@ -109,6 +109,7 @@ function worldMap() {
                         document.getElementById("info-population").innerHTML = row.population ? parseInt(row.population).toLocaleString() : "n/a";
                         document.getElementById("info-cases").innerHTML = row.total_cases ? parseInt(row.total_cases).toLocaleString() : "n/a";
                         document.getElementById("info-deaths").innerHTML = row.total_deaths ? parseInt(row.total_deaths).toLocaleString() : "n/a";
+                        document.getElementById("info-vaccinated").innerHTML = row.total_vaccinations ? parseInt(row.total_vaccinations).toLocaleString() : "n/a";
 
                         const parsedVaccinationData = fetchVaccinations();
                         console.log('onClicked:',parsedVaccinationData)

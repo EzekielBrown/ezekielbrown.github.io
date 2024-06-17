@@ -174,30 +174,36 @@ const quizzes = {
                 "Gradient Descent, K-means, DBSCAN, Hierarchical clustering, SVM"
             ],
             correct: 0,
-            explanation: "Common clustering algorithms include K-means, DBSCAN, Hierarchical clustering, Gaussian Mixture Models, and Spectral clustering. Other algorithms are Agglomerative clustering, BIRCH, OPTICS, Affinity Propagation, Mean Shift, CURE, and Fuzzy C-means. Each of these algorithms has unique strengths and applications depending on the data and clustering requirements."
+            explanation: "Common clustering algorithms include K-means, DBSCAN, Hierarchical clustering, Gaussian Mixture Models, and Spectral clustering. <br><br> Other algorithms are Agglomerative clustering, BIRCH, OPTICS, Affinity Propagation, Mean Shift, CURE, and Fuzzy C-means. Each of these algorithms has unique strengths and applications depending on the data and clustering requirements."
         },
         {
             question: "Choose one clustering algorithm and very briefly outline how it works.",
             options: [
                 "K-means: It partitions data into K clusters by minimizing the variance within each cluster.",
-                "Decision Trees: It splits the data into branches based on feature values.",
-                "PCA: It reduces dimensionality by transforming data into principal components.",
-                "Gradient Descent: It optimizes the loss function to find the best model parameters."
+                "DBSCAN: It groups data points based on density, identifying core points and expanding clusters from these points.",
+                "Hierarchical Clustering: It creates a tree of clusters (dendrogram) using agglomerative or divisive approaches.",
+                "Gaussian Mixture Models: It assumes data is generated from a mixture of Gaussian distributions and uses the Expectation-Maximization (EM) algorithm to estimate parameters."
             ],
-            correct: 0,
-            explanation: "K-means partitions data into K clusters by minimizing the variance within each cluster. It starts by selecting K initial centroids, assigns each data point to the nearest centroid, and then updates the centroids by averaging the points in each cluster. DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups data points based on their density, identifying core points and expanding clusters from these points, while handling noise effectively. Hierarchical clustering creates a tree of clusters (dendrogram) using either agglomerative (bottom-up) or divisive (top-down) approaches. Gaussian Mixture Models (GMM) assume data is generated from a mixture of Gaussian distributions and use the Expectation-Maximization (EM) algorithm to estimate parameters, capturing complex cluster shapes. Spectral clustering uses eigenvalues of a similarity matrix to reduce dimensionality and apply clustering, capturing the global structure of data."
-        },
+            correct: null,
+            explanation: `K-means partitions data into K clusters by minimizing the variance within each cluster.
+        It starts by selecting K initial centroids, assigns each data point to the nearest centroid, and then updates the centroids by averaging the points in each cluster.<br><br>
+        DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups data points based on their density, identifying core points and expanding clusters from these points, while handling noise effectively.<br><br>
+        Hierarchical clustering creates a tree of clusters (dendrogram) using either agglomerative (bottom-up) or divisive (top-down) approaches.<br><br>
+        Gaussian Mixture Models (GMM) assume data is generated from a mixture of Gaussian distributions and use the Expectation-Maximization (EM) algorithm to estimate parameters, capturing complex cluster shapes.`
+        }
+        ,
         {
             question: "Describe one application or task where the chosen algorithm would perform poorly, explaining the reasons why it would not be suitable.",
             options: [
                 "K-means would perform poorly on data with non-convex shapes or varying cluster densities because it assumes spherical clusters of similar size.",
-                "Decision Trees would perform poorly on high-dimensional data because they are prone to overfitting.",
-                "PCA would perform poorly on non-linear data because it assumes linear relationships.",
-                "Gradient Descent would perform poorly on large datasets because it requires multiple iterations."
+                "DBSCAN would perform poorly on datasets with varying densities and high-dimensional data because it relies on a fixed density threshold.",
+                "Hierarchical clustering would perform poorly on large datasets because it is computationally expensive and does not scale well.",
+                "Gaussian Mixture Models would perform poorly on data that does not fit well into Gaussian distributions, as it assumes the data is generated from a mixture of Gaussian distributions."
             ],
-            correct: 0,
-            explanation: "K-means partitions data into K clusters by minimizing the variance within each cluster. It starts by selecting K initial centroids, assigns each data point to the nearest centroid, and then updates the centroids by averaging the points in each cluster. This process repeats until the centroids stabilize. DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups data points based on their density. It identifies core points that have many neighbors within a specified radius, expands clusters from these core points, and labels points that don't belong to any cluster as noise. DBSCAN is effective for finding clusters of arbitrary shapes and handling noise. Hierarchical clustering creates a tree of clusters called a dendrogram. It can be agglomerative (bottom-up), where each data point starts as its own cluster and pairs of clusters are merged iteratively, or divisive (top-down), where the process starts with one cluster and splits it into smaller clusters. Gaussian Mixture Models (GMM) assume that data is generated from a mixture of several Gaussian distributions with unknown parameters. GMM uses the Expectation-Maximization (EM) algorithm to estimate the parameters of these Gaussian distributions and assign probabilities to each data point belonging to each cluster. This approach can capture more complex cluster shapes. Spectral clustering uses the eigenvalues of a similarity matrix (constructed from the data) to reduce the dimensionality of the data before applying a clustering algorithm like K-means. It is particularly effective for finding clusters in data that is not well separated in the original feature space, as it captures the global structure of the data."
-        },
+            correct: null,
+            explanation: "Each clustering algorithm has scenarios where it may not perform well. K-means assumes spherical clusters of similar size, DBSCAN relies on a fixed density threshold, Hierarchical clustering is computationally expensive for large datasets, and Gaussian Mixture Models assume the data fits Gaussian distributions."
+        }
+        ,
 
         // Web Intelligence
         {
@@ -753,7 +759,7 @@ function displayQuestion() {
 
     questionElement.textContent = questionData.question;
     optionsElement.innerHTML = "";
-    explanationElement.textContent = "";
+    explanationElement.innerHTML = ""; // Use innerHTML to allow HTML tags
 
     questionData.options.forEach((option, index) => {
         const optionButton = document.createElement("button");
@@ -775,7 +781,7 @@ function checkAnswer(selectedIndex, selectedButton) {
     const nextButton = document.getElementById(`next${currentQuiz.slice(-1)}`);
     const explanationElement = document.getElementById(`explanation${currentQuiz.slice(-1)}`);
 
-    if (selectedIndex === correctIndex) {
+    if (correctIndex === null || selectedIndex === correctIndex) {
         selectedButton.classList.add("correct");
         score++;
     } else {
@@ -783,13 +789,14 @@ function checkAnswer(selectedIndex, selectedButton) {
         optionsElement.children[correctIndex].classList.add("correct");
     }
 
-    explanationElement.textContent = questionData.explanation;
+    explanationElement.innerHTML = questionData.explanation; // Use innerHTML to render HTML tags
     Array.from(optionsElement.children).forEach(button => {
         button.disabled = true;
     });
 
     nextButton.classList.remove("hidden");
 }
+
 
 function nextQuestion() {
     const quiz = quizzes[currentQuiz];
@@ -837,8 +844,12 @@ function shuffleArray(array) {
 function randomizeQuestions() {
     const quiz = quizzes[currentQuiz];
     quiz.forEach(question => {
-        const correctAnswer = question.options[question.correct];
-        question.options = shuffleArray(question.options);
-        question.correct = question.options.indexOf(correctAnswer);
+        if (question.correct !== null) {
+            const correctAnswer = question.options[question.correct];
+            question.options = shuffleArray(question.options);
+            question.correct = question.options.indexOf(correctAnswer);
+        } else {
+            question.options = shuffleArray(question.options);
+        }
     });
 }
