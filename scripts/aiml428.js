@@ -514,7 +514,6 @@ const quizzes = {
             ],
             correct: 0
         }
-        
     ]
 };
 
@@ -523,6 +522,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
+    randomizeQuestions();
     displayQuestion();
 });
 
@@ -537,6 +537,7 @@ function showQuiz(quiz) {
     document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
     document.querySelector(`button[onclick="showQuiz('${quiz}')"]`).classList.add('active');
     
+    randomizeQuestions();
     displayQuestion();
 }
 
@@ -617,5 +618,23 @@ function restartQuiz() {
     resultContainer.classList.add("hidden");
     quizContainer.classList.remove("hidden");
 
+    randomizeQuestions();
     displayQuestion();
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function randomizeQuestions() {
+    const quiz = quizzes[currentQuiz];
+    quiz.forEach(question => {
+        const correctAnswer = question.options[question.correct];
+        question.options = shuffleArray(question.options);
+        question.correct = question.options.indexOf(correctAnswer);
+    });
 }
