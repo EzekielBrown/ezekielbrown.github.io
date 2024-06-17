@@ -9,99 +9,39 @@ const quizzes = {
                 "TF-IDF and LSI. LSI is better because it reduces dimensionality using SVD."
             ],
             correct: 0
-          },
-          {
+        },
+        {
             question: "Briefly describe how Word2Vec works and name its two different models.",
             options: [
-                "Word2Vec is a count-based model that uses co-occurrence matrices. The two models are Skip-Gram and Continuous Bag of Words (CBOW).",
                 "Word2Vec is a neural network-based approach to learning word embeddings. The two models are Skip-Gram and Continuous Bag of Words (CBOW).",
+                "Word2Vec is a count-based model that uses co-occurrence matrices. The two models are Skip-Gram and Continuous Bag of Words (CBOW).",
                 "Word2Vec is a rule-based model that uses predefined word pairs. The two models are GloVe and fastText.",
                 "Word2Vec is a statistical model that uses term frequency. The two models are LDA and LSI."
             ],
-            correct: 1
-          },
-          {
+            correct: 0
+        },
+        {
             question: "In your opinion, what are the main limitations of the current text representation models? Suggest some solutions that may address these limitations.",
             options: [
-                "Limitations: Capturing semantic meaning, ignoring word frequency. Solutions: Use BoW and TF-IDF.",
                 "Limitations: High-dimensional sparse vectors, polysemy. Solutions: Use advanced embeddings like GloVe, fastText, contextualized embeddings like BERT, GPT, and hybrid models.",
+                "Limitations: Capturing semantic meaning, ignoring word frequency. Solutions: Use BoW and TF-IDF.",
                 "Limitations: Ignoring grammar, low-dimensional vectors. Solutions: Use more complex models like LDA and LSI.",
                 "Limitations: Handling large corpora, ignoring semantics. Solutions: Use rule-based approaches and dictionaries."
             ],
-            correct: 1
-          },
-          {
-            question: "Write pseudocode to show the main steps needed to process the data so it can be fed into a simple classifier such as K Nearest Neighbour.",
-            options: [
-                "1. Load data and labels\n2. Preprocess data using BoW\n3. Split data into training and testing sets\n4. Train classifier using SVM\n5. Evaluate classifier",
-                "1. Load data and labels\n2. Preprocess data using TF-IDF\n3. Split data into training and testing sets\n4. Train classifier using KNeighborsClassifier\n5. Evaluate classifier",
-                "1. Load data and labels\n2. Preprocess data using Word2Vec\n3. Split data into training and testing sets\n4. Train classifier using Naive Bayes\n5. Evaluate classifier",
-                "1. Load data and labels\n2. Preprocess data using LDA\n3. Split data into training and testing sets\n4. Train classifier using Random Forest\n5. Evaluate classifier"
-            ],
-            correct: 1
-          },
-          {
-            question: "Very briefly explain what a convolutional layer does and what a pooling layer does in the context of image classification. Explain the main differences between CNN for image classification and CNN for text classification.",
-            options: [
-                "Convolutional layer applies filters to capture local patterns. Pooling layer reduces spatial dimensions. CNN for images captures sequential patterns; CNN for text captures visual features.",
-                "Convolutional layer applies filters to capture local patterns. Pooling layer increases spatial dimensions. CNN for images captures visual features; CNN for text captures sequential patterns.",
-                "Convolutional layer applies filters to capture local patterns. Pooling layer reduces spatial dimensions. CNN for images captures visual features; CNN for text captures sequential patterns.",
-                "Convolutional layer increases spatial dimensions. Pooling layer applies filters to capture local patterns. CNN for images captures visual features; CNN for text captures sequential patterns."
-            ],
-            correct: 2
-          },
-          {
+            correct: 0
+        },
+        {
             question: "What are the main differences between text classification and text clustering? Name one evaluation measure for classification and one for clustering, and briefly explain how they are calculated.",
             options: [
-                "Text classification is unsupervised, grouping documents based on similarities. Text clustering is supervised, assigning predefined labels. Evaluation measures: Precision (classification) and F1-Score (clustering).",
                 "Text classification is supervised, assigning predefined labels. Text clustering is unsupervised, grouping based on similarities. Evaluation measures: Accuracy (classification) and Silhouette Score (clustering).",
-                "Text classification is supervised, assigning predefined labels. Text clustering is unsupervised, grouping based on similarities. Evaluation measures: F1-Score (classification) and Precision (clustering).",
-                "Text classification is supervised, grouping documents based on similarities. Text clustering is unsupervised, assigning predefined labels. Evaluation measures: Silhouette Score (classification) and Accuracy (clustering)."
-            ],
-            correct: 1
-          },
-          {
-            question: "Describe how you would represent data, choose a clustering algorithm, and evaluate the performance of a system that groups all unique words in a book into clusters.",
-            options: [
-                "Represent words using BoW. Use DBSCAN for clustering. Evaluate using Silhouette Score.",
-                "Represent words using LDA. Use K-Means for clustering. Evaluate using Precision.",
-                "Represent words using embeddings (Word2Vec). Use K-Means for clustering. Evaluate using Silhouette Score.",
-                "Represent words using TF-IDF. Use Agglomerative Clustering. Evaluate using F1-Score."
-            ],
-            correct: 2
-          },
-          {
-            question: "Name at least five clustering algorithms. Choose one algorithm and briefly outline how it works. Describe one application where the chosen algorithm would perform poorly.",
-            options: [
-                "Algorithms: K-Means, Hierarchical, DBSCAN, GMM, Agglomerative. DBSCAN clusters based on density. Performs poorly with clusters of varying density, such as social network data.",
-                "Algorithms: K-Means, Hierarchical, DBSCAN, GMM, Agglomerative. K-Means clusters based on density. Performs poorly with clusters of varying density, such as social network data.",
-                "Algorithms: K-Means, LDA, DBSCAN, GMM, Agglomerative. LDA clusters based on density. Performs poorly with clusters of varying density, such as social network data.",
-                "Algorithms: K-Means, Hierarchical, DBSCAN, GMM, LDA. DBSCAN clusters based on density. Performs poorly with clusters of varying density, such as social network data."
+                "Text classification is unsupervised, grouping documents based on similarities. Text clustering is supervised, assigning predefined labels. Evaluation measures: Precision (classification) and F1-Score (clustering).",
+                "Text classification is supervised, grouping documents based on similarities. Text clustering is unsupervised, assigning predefined labels. Evaluation measures: Silhouette Score (classification) and Accuracy (clustering).",
+                "Text classification is supervised, assigning predefined labels. Text clustering is unsupervised, grouping based on similarities. Evaluation measures: F1-Score (classification) and Precision (clustering)."
             ],
             correct: 0
-          },
-          {
-            question: "Suppose you want to design a house recommender system. What are the challenges? Which approach is most suitable for house recommendation? Justify your answer.",
-            options: [
-                "Challenges: Heterogeneous data, dynamic listings, personalization, cold start. Hybrid approach (content-based + collaborative filtering) is suitable for addressing these challenges.",
-                "Challenges: High-dimensional data, static listings, uniform preferences. Collaborative filtering is suitable for addressing these challenges.",
-                "Challenges: Low-dimensional data, dynamic listings, uniform preferences. Content-based filtering is suitable for addressing these challenges.",
-                "Challenges: Homogeneous data, static listings, personalization, cold start. Content-based filtering is suitable for addressing these challenges."
-            ],
-            correct: 0
-          },
-          {
-            question: "What are the main approaches in query expansion?",
-            options: [
-                "Approaches: Manual/expert-based, automatic relevance feedback, thesaurus-based, ontology-based.",
-                "Approaches: Manual/expert-based, automatic relevance feedback, dictionary-based, rule-based.",
-                "Approaches: Automatic relevance feedback, thesaurus-based, dictionary-based, ontology-based.",
-                "Approaches: Manual/expert-based, automatic relevance feedback, thesaurus-based, dictionary-based."
-            ],
-            correct: 0
-          },
-          {
-            question: "State the main challenges in natural language understanding.",
+        },
+        {
+            question: "What are the main challenges in natural language understanding?",
             options: [
                 "Challenges: Ambiguity, context understanding, variability, complexity, idiomatic expressions.",
                 "Challenges: Context understanding, uniformity, variability, complexity, idiomatic expressions.",
@@ -109,8 +49,8 @@ const quizzes = {
                 "Challenges: Ambiguity, context understanding, variability, complexity, literal expressions."
             ],
             correct: 0
-          },
-          {
+        },
+        {
             question: "Describe a basic algorithm that Google uses to rank search results. Explain its advantages and disadvantages.",
             options: [
                 "PageRank: Ranks pages based on backlink quality and quantity. Advantages: Relevance, simplicity. Disadvantages: Manipulation, popularity bias.",
@@ -119,7 +59,47 @@ const quizzes = {
                 "BM25: Ranks pages based on term frequency and document length. Advantages: Relevance, simplicity. Disadvantages: Manipulation, popularity bias."
             ],
             correct: 0
-          }
+        },
+        {
+            question: "What are the main approaches in query expansion?",
+            options: [
+                "Approaches: Manual/expert-based, automatic relevance feedback, thesaurus-based, ontology-based.",
+                "Approaches: Manual/expert-based, automatic relevance feedback, dictionary-based, rule-based.",
+                "Approaches: Automatic relevance feedback, thesaurus-based, dictionary-based, ontology-based.",
+                "Approaches: Manual/expert-based, automatic relevance feedback, thesaurus-based, dictionary-based."
+            ],
+            correct: 0
+        },
+        {
+            question: "Suppose you want to design a house recommender system to help people find the right house to buy. What are the challenges? Which approach is most suitable for house recommendation? Justify your answer.",
+            options: [
+                "Challenges: Heterogeneous data, dynamic listings, personalization, cold start. Hybrid approach (content-based + collaborative filtering) is suitable for addressing these challenges.",
+                "Challenges: High-dimensional data, static listings, uniform preferences. Collaborative filtering is suitable for addressing these challenges.",
+                "Challenges: Low-dimensional data, dynamic listings, uniform preferences. Content-based filtering is suitable for addressing these challenges.",
+                "Challenges: Homogeneous data, static listings, personalization, cold start. Content-based filtering is suitable for addressing these challenges."
+            ],
+            correct: 0
+        },
+        {
+            question: "Name at least five clustering algorithms. Choose one algorithm and very briefly outline how it works. Describe one application or task where the chosen algorithm would perform poorly, explaining the reasons why it would not be suitable.",
+            options: [
+                "K-Means, Hierarchical Clustering, DBSCAN, GMM, Agglomerative Clustering. K-Means clusters data into K groups by minimizing within-cluster variance. Performs poorly with clusters of varying density, such as social network data.",
+                "K-Means, Hierarchical Clustering, DBSCAN, GMM, Agglomerative Clustering. DBSCAN clusters data based on density. Performs poorly with clusters of varying density, such as social network data.",
+                "K-Means, LDA, DBSCAN, GMM, Agglomerative Clustering. LDA clusters based on density. Performs poorly with clusters of varying density, such as social network data.",
+                "K-Means, Hierarchical Clustering, DBSCAN, GMM, LDA. DBSCAN clusters based on density. Performs poorly with clusters of varying density, such as social network data."
+            ],
+            correct: 0
+        },
+        {
+            question: "Suppose you want to design a system that automatically groups all the unique words in a book into different clusters, so that the words in the same cluster are semantically related. Describe how you are going to represent the data, what clustering algorithm you might use and why, and how you are going to evaluate the performance of your system.",
+            options: [
+                "Represent words using embeddings (Word2Vec). Use K-Means for clustering. Evaluate using Silhouette Score.",
+                "Represent words using LDA. Use DBSCAN for clustering. Evaluate using Precision.",
+                "Represent words using TF-IDF. Use Agglomerative Clustering. Evaluate using F1-Score.",
+                "Represent words using BoW. Use GMM for clustering. Evaluate using Silhouette Score."
+            ],
+            correct: 0
+        }        
     ],
     quiz2: [
         {
@@ -433,7 +413,108 @@ const quizzes = {
                 "CNNs can handle variable-length sequences better than RNNs."
             ],
             correct: 0
+        }, 
+        {
+            question: "What is the main difference between content-based and collaborative filtering recommender systems?",
+            options: [
+                "Content-based filtering recommends items based on item attributes, while collaborative filtering recommends items based on user interactions.",
+                "Content-based filtering uses neural networks, while collaborative filtering uses decision trees.",
+                "Content-based filtering is faster but less accurate than collaborative filtering.",
+                "Collaborative filtering only works with explicit feedback, while content-based filtering works with implicit feedback."
+            ],
+            correct: 0
+        },
+        {
+            question: "What are the key components of a Transformer model?",
+            options: [
+                "Self-attention mechanism and feed-forward neural network.",
+                "Convolutional layers and pooling layers.",
+                "Recurrent layers and attention mechanism.",
+                "Support vector machines and clustering algorithms."
+            ],
+            correct: 0
+        },
+        {
+            question: "How does BERT differ from traditional word embeddings like Word2Vec?",
+            options: [
+                "BERT generates contextual embeddings for words based on the entire sentence, while Word2Vec generates static embeddings.",
+                "BERT uses clustering algorithms to generate embeddings, while Word2Vec uses neural networks.",
+                "BERT is faster to train than Word2Vec.",
+                "Word2Vec can handle longer sequences of text than BERT."
+            ],
+            correct: 0
+        },
+        {
+            question: "What is the role of attention in the Transformer architecture?",
+            options: [
+                "Attention allows the model to focus on different parts of the input sequence, improving the ability to capture dependencies.",
+                "Attention reduces the dimensionality of the input data.",
+                "Attention is used to initialize the weights of the model.",
+                "Attention helps in sorting the input data."
+            ],
+            correct: 0
+        },
+        {
+            question: "What are some common metrics used to evaluate recommender systems?",
+            options: [
+                "Precision, Recall, and Mean Average Precision (MAP).",
+                "Accuracy, F1-Score, and Mean Squared Error (MSE).",
+                "ROC-AUC, Log-Loss, and Gini Coefficient.",
+                "Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index."
+            ],
+            correct: 0
+        },
+        {
+            question: "What is the purpose of the `classifier-KNN.ipynb` notebook?",
+            options: [
+                "To demonstrate the implementation of the K-Nearest Neighbors algorithm for classification.",
+                "To train a convolutional neural network on image data.",
+                "To cluster data points using K-Means algorithm.",
+                "To perform dimensionality reduction using PCA."
+            ],
+            correct: 0
+        },
+        {
+            question: "What is Explicit Semantic Analysis (ESA) primarily used for?",
+            options: [
+                "To represent the meaning of texts as a weighted vector of Wikipedia-based concepts.",
+                "To analyze the sentiment of text documents.",
+                "To cluster documents into predefined categories.",
+                "To generate new text based on input data."
+            ],
+            correct: 0
+        },
+        {
+            question: "What is the primary function of the `lecture-tfidf.ipynb` notebook?",
+            options: [
+                "To demonstrate how to calculate and use TF-IDF for text classification.",
+                "To visualize the embeddings of words in a vector space.",
+                "To implement a deep learning model for image classification.",
+                "To perform clustering on a set of documents."
+            ],
+            correct: 0
+        },
+        {
+            question: "How do you interpret the output of a confusion matrix in classification?",
+            options: [
+                "It shows the number of true positives, true negatives, false positives, and false negatives, helping evaluate the performance of a classifier.",
+                "It provides a graphical representation of the classifier's decision boundaries.",
+                "It shows the distribution of data points in different clusters.",
+                "It visualizes the loss and accuracy curves during model training."
+            ],
+            correct: 0
+        },
+        {
+            question: "What is the main advantage of using a pre-trained BERT model for NLP tasks?",
+            options: [
+                "It leverages transfer learning to improve performance on specific tasks with less training data.",
+                "It significantly reduces the size of the model.",
+                "It eliminates the need for labeled data.",
+                "It automatically tunes hyperparameters."
+            ],
+            correct: 0
         }
+        
     ]
 };
 
