@@ -1,6 +1,6 @@
 const quizzes = {
     quiz1: [
-        // Text Representation
+        // Text Representation     
         {
             question: "Very briefly describe two commonly used models for document representation.",
             options: [
@@ -251,6 +251,40 @@ const quizzes = {
             correct: 0,
             explanation: "Challenges in natural language understanding include ambiguity, where words can have multiple meanings, and diversity of language, where the same idea can be expressed in various ways. These factors make it difficult to accurately interpret and process text. Handling such complexities requires advanced models and techniques."
         },
+        {
+            question: "Suppose you are using Python to implement a very simple text classification system. You have a collection of documents as plain text files and each document starts with a manually assigned label. Write pseudocode to show the main steps that are needed to process the data so the data can be feed into a simple classifier such as K Nearest Neighbour.",
+            options: [
+                `1. Read the documents and extract labels and content.
+                2. Preprocess the text (e.g., remove punctuation, convert to lowercase, remove stop words).
+                3. Convert the text into numerical features using techniques like TF-IDF.
+                4. Split the data into training and test sets.
+                5. Train a K Nearest Neighbour classifier on the training data.
+                6. Evaluate the classifier on the test data.`,
+                `1. Read the documents and extract labels and content.
+                2. Directly feed the raw text into the K Nearest Neighbour classifier.
+                3. Train the K Nearest Neighbour classifier on the raw text.
+                4. Evaluate the classifier on the test data.`,
+                `1. Read the documents and extract labels and content.
+                2. Preprocess the text (e.g., remove punctuation, convert to lowercase).
+                3. Convert the text into numerical features using techniques like word embeddings.
+                4. Train a Decision Tree classifier on the training data.
+                5. Evaluate the classifier on the test data.`,
+                `1. Read the documents and extract labels and content.
+                2. Preprocess the text (e.g., remove punctuation, convert to lowercase, remove stop words).
+                3. Use a clustering algorithm to group similar documents.
+                4. Train a K Nearest Neighbour classifier on the clustered data.
+                5. Evaluate the classifier on the test data.`
+            ],
+            correct: 0,
+            explanation: `The main steps to implement a simple text classification system using Python are:<br>
+        1. Read the documents and extract labels and content.<br>
+        2. Preprocess the text (e.g., remove punctuation, convert to lowercase, remove stop words).<br>
+        3. Convert the text into numerical features using techniques like TF-IDF.<br>
+        4. Split the data into training and test sets.<br>
+        5. Train a K Nearest Neighbour classifier on the training data.<br>
+        6. Evaluate the classifier on the test data.<br>
+        These steps ensure that the text data is cleaned and converted into a suitable format for the classifier to learn from and make predictions.`
+        },   
         {
             question: "Describe a basic algorithm that Google uses to rank the search results. Explain its advantages and disadvantages.",
             options: [
