@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Exam Question Cards</title>
     <link rel="stylesheet" href="styles/aiml428.css">
+    <script src="scripts/aiml428.js" defer></script>
 </head>
 <body>
-    <div class="quiz-container">
-        <h1 id="section-header">Section Title</h1> <!-- Section header -->
-        <div class="question-tracker">Question <span id="question-number">1</span>/12</div>
-        <div class="question-container">
-            <h2 id="question-text">Question goes here</h2>
+    <div class="container">
+        <h1>Exam Study Cards</h1>
+        <div class="button-container">
+            <button onclick="switchCategory('algorithm')">AI-related Algorithm Design and Analysis</button>
+            <button onclick="switchCategory('reinforcement')">Reinforcement Learning</button>
+            <button onclick="switchCategory('foundational')">Foundational Models</button>
+            <button onclick="switchCategory('cnn')">Convolutional Neural Networks for Image Synthesis</button>
         </div>
-        <div class="answer-container">
-            <button class="answer-button">Answer 1</button>
-            <button class="answer-button">Answer 2</button>
-            <button class="answer-button">Answer 3</button>
-            <button class="answer-button">Answer 4</button>
-        </div>
-        <button id="next-button">Next Question</button>
-        <button id="next-section-button">Next Section</button> <!-- Next Section Button always visible -->
-        <button id="restart-button">Restart Quiz</button> <!-- Restart Button always visible -->
-    </div>
 
-    <script src="scripts/aiml428.js"></script>
+        <div id="question-card" class="card">
+            <h2 id="category-title">Category Title</h2>
+            <p id="question-text">Question will appear here</p>
+            <button onclick="showAnswer()">Show Answer</button>
+            <p id="answer-text" class="hidden">Answer will appear here</p>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
 </body>
 </html>
