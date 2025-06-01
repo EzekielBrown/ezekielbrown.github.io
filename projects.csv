@@ -1,8 +1,8 @@
 Name,Date,Category,Description,Image,Percent Completed,Skills,Link
 Predicting Salmon's Health Using AI,Nov-23,School,Final Project for my Bachelors of Information Technology.,,100,Python;Scikit-Learn;PySimpleGui,
 Predictive Modelling of Feed Conversion Efficiency in King Salmon,Jun-25,School,Final Project for my Masters in Artificial Intelligence.,,95,Python;Scikit-Learn;DEAP;Streamlit;tkinter,
-Anything Electronic Website,Jan-23,Professional,"Website for the Nelson based company, Anything Electronic. ",,100,Zencart;PHP,
-Fitzgerald Construction Website,Oct-23,Professional,"Website for the Nelson based company, Fitzgerald Construction. Upon completion, it was never used as they received a website as part of a marketing package.",,100,Webflow,
+Anything Electronic Website,Jan-23,Professional,"Website for the Nelson based company, Anything Electronic. First time, learning PHP and Zencart. The website was a webstore in which the price adjust depending on the customers. ",,100,Zencart;PHP,
+Fitzgerald Construction Website,Jun-23,Professional,"Website for the Nelson based company, Fitzgerald Construction. This was the first time learning how Webflow worked and operated. The website was a portfolio website with a blog and contact page. Upon completion, it was never used as they received a website as part of a marketing package.",,100,Webflow,
 Personal Website,Jun-25,Personal,"A portfolio website for myself. This is the third iteration. First iteration used Google Sites. Second iteration was basic HTML, CSS, and JavaScript. ",,55,HTML;CSS;REACT;JavaScript,
 Sale Tracking,May-25,Personal,An android app that tracked my personal sales and inventory. ,,85,Kotlin;Android Studio,
 Stem Isolator,Dec-24,Personal,An android app that plays multiple tracks at once with the ability to mute each track.,,90,Kotlin;Android Studio,
