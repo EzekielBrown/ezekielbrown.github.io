@@ -419,6 +419,7 @@ html, body, #root {
 
 .progress-bar-fill {
   background: #6ec1e4;
+  box-shadow: 0 0 15px 5px rgba(110, 193, 228, 0.5);
   height: 100%;
   width: 0%;
   transition: width 0.5s ease;
