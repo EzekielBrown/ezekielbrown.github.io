@@ -16,7 +16,7 @@ export default function ShopPage() {
   const [allItems, setAllItems] = useState([]);
 
   /* ====================================================
-   * 1) FETCH & PARSE CSV (now including Skills)
+   * 1) FETCH & PARSE CSV
    * ==================================================== */
   useEffect(() => {
     fetch("/shop.csv")
@@ -36,7 +36,8 @@ export default function ShopPage() {
               Description: row.Description,
               Image: row.Image ? row.Image.trim() : "",
               inStock: parseInt(row["In Stock"], 10) || 0,
-              // Parse Skills as an array (comma-separated in CSV)
+              // include Console column
+              Console: row.Console ? row.Console.trim() : "",
               Skills: row.Skills
                 ? row.Skills.split(",").map((s) => s.trim())
                 : [],
@@ -54,7 +55,7 @@ export default function ShopPage() {
   }, []);
 
   /* ====================================================
-   * 2) FILTER & SORT ITEMS (unchanged)
+   * 2) FILTER & SORT ITEMS
    * ==================================================== */
   const filtered = allItems
     .filter((item) => item.Category === selectedCategory)
@@ -65,7 +66,7 @@ export default function ShopPage() {
     });
 
   /* ====================================================
-   * 3) RENDER COMPONENT (console icon removed; skills badges added)
+   * 3) RENDER COMPONENT
    * ==================================================== */
   return (
     <Background>
@@ -92,7 +93,7 @@ export default function ShopPage() {
 
                 <p className="shop-description">{item.Description}</p>
 
-                {/* ===== New: Render Skills as badges ===== */}
+                {/* Render Skills as badges */}
                 {item.Skills && item.Skills.length > 0 && (
                   <div className="project-skills">
                     {item.Skills.map((skill, i) => (
@@ -100,6 +101,13 @@ export default function ShopPage() {
                         {skill}
                       </span>
                     ))}
+                  </div>
+                )}
+
+                {/* Render Console as a badge (if present) */}
+                {item.Console && (
+                  <div className="project-skills">
+                    <span className="skill-badge">{item.Console}</span>
                   </div>
                 )}
 

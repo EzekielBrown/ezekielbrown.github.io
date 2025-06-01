@@ -12,3 +12,4 @@ Taxi Game using MySQL,Jun-23,School,A taxi game created in C# that uses MySQL as
 Charity Website,Jun-23,School,A website created for a fictional charity where users are able to log in and post jobs that they need help with.,,100,React;Express;Node.js;MongoDB;Redux;Material-UI,
 Taxi App,May-23,School,"A C# admin app where the admin can add jobs, vehicles, and customer information.",,100,C#,
 Phoenix Tour App,Oct-22,School,"A C# admin app where the admin can add tours, jobs, vehicles, and customer information.",,100,C#,
+Covid-19 Dashboard,May-24,School,"A website dashboard for Covid-19. In a group of 3, I created the majority of the website with a clickable world map that would return Covid-19 information for each country.",,100,HTML;CSS;JavaScript,
